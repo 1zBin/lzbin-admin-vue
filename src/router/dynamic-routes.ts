@@ -1,6 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router'
 import { basicRouteMap } from './router-modules'
-import { AccessEnum } from '~@/utils/constant'
 
 export default [
   {
@@ -78,124 +77,6 @@ export default [
       },
     ],
   },
-  // {
-  //   path: '/link',
-  //   redirect: '/link/iframe',
-  //   name: 'Link',
-  //   meta: {
-  //     title: '链接',
-  //     icon: 'LinkOutlined',
-  //   },
-  //   component: basicRouteMap.RouteView,
-  //   children: [
-  //     {
-  //       path: '/link/iframe',
-  //       name: 'LinkIframe',
-  //       component: basicRouteMap.Iframe,
-  //       meta: {
-  //         title: 'AntDesign',
-  //         url: 'https://ant.design/',
-  //       },
-  //     },
-  //     {
-  //       path: '/link/antdv',
-  //       name: 'LinkAntdv',
-  //       component: basicRouteMap.Iframe,
-  //       meta: {
-  //         title: 'AntDesignVue',
-  //         url: 'https://antdv.com/',
-  //       },
-  //     },
-  //     {
-  //       path: 'https://www.baidu.com',
-  //       name: 'LinkExternal',
-  //       meta: {
-  //         title: '跳转百度',
-  //         // target: '_self',
-  //       },
-  //     },
-  //   ],
-  // },
-  // {
-  //   path: '/menu',
-  //   redirect: '/menu/menu1',
-  //   name: 'Menu',
-  //   meta: {
-  //     title: '菜单',
-  //     icon: 'BarsOutlined',
-  //   },
-  //   component: basicRouteMap.RouteView,
-  //   children: [
-  //     {
-  //       path: '/menu/menu1',
-  //       name: 'MenuMenu11',
-  //       component: () => import('~/pages/menu/menu1.vue'),
-  //       meta: {
-  //         title: '菜单1',
-  //       },
-  //     },
-  //     {
-  //       path: '/menu/menu2',
-  //       name: 'MenuMenu12',
-  //       component: () => import('~/pages/menu/menu2.vue'),
-  //       meta: {
-  //         title: '菜单2',
-  //       },
-  //     },
-  //     {
-  //       path: '/menu/menu3',
-  //       redirect: '/menu/menu3/menu1',
-  //       name: 'MenuMenu1-1',
-  //       meta: {
-  //         title: '菜单1-1',
-  //       },
-  //       children: [
-  //         {
-  //           path: '/menu/menu3/menu1',
-  //           name: 'MenuMenu111',
-  //           component: () => import('~/pages/menu/menu-1-1/menu1.vue'),
-  //           meta: {
-  //             title: '菜单1-1-1',
-  //           },
-  //         },
-  //         {
-  //           path: '/menu/menu3/menu2',
-  //           name: 'MenuMenu112',
-  //           component: () => import('~/pages/menu/menu-1-1/menu2.vue'),
-  //           meta: {
-  //             title: '菜单1-1-2',
-  //           },
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       path: '/menu/menu4',
-  //       redirect: '/menu/menu4/menu1',
-  //       name: 'MenuMenu2-1',
-  //       meta: {
-  //         title: '菜单2-1',
-  //       },
-  //       children: [
-  //         {
-  //           path: '/menu/menu4/menu1',
-  //           name: 'MenuMenu211',
-  //           component: () => import('~/pages/menu/menu-2-1/menu1.vue'),
-  //           meta: {
-  //             title: '菜单2-1-1',
-  //           },
-  //         },
-  //         {
-  //           path: '/menu/menu4/menu2',
-  //           name: 'MenuMenu212',
-  //           component: () => import('~/pages/menu/menu-2-1/menu2.vue'),
-  //           meta: {
-  //             title: '菜单2-1-2',
-  //           },
-  //         },
-  //       ],
-  //     },
-  //   ],
-  // },
   {
     path: '/profile',
     name: 'profile',
@@ -218,43 +99,6 @@ export default [
       },
     ],
   },
-  // {
-  //   path: '/access',
-  //   redirect: '/access/common',
-  //   name: 'Access',
-  //   meta: {
-  //     title: '权限模块',
-  //     icon: 'ClusterOutlined',
-  //   },
-  //   children: [
-  //     {
-  //       path: '/access/common',
-  //       name: 'AccessCommon',
-  //       component: () => import('~/pages/access/common.vue'),
-  //       meta: {
-  //         title: '通用权限',
-  //       },
-  //     },
-  //     {
-  //       path: '/access/user',
-  //       name: 'AccessUser',
-  //       component: () => import('~/pages/access/user.vue'),
-  //       meta: {
-  //         title: '普通用户',
-  //         access: [AccessEnum.USER, AccessEnum.ADMIN],
-  //       },
-  //     },
-  //     {
-  //       path: '/access/admin',
-  //       name: 'AccessAdmin',
-  //       component: () => import('~/pages/access/admin.vue'),
-  //       meta: {
-  //         title: '管理员',
-  //         access: [AccessEnum.ADMIN],
-  //       },
-  //     },
-  //   ],
-  // },
   {
     path: '/exception',
     redirect: '/exception/403',
