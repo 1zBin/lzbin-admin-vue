@@ -34,7 +34,7 @@ export default eventHandler(async (_event) => {
     },
     {
       id: 6,
-      name: 'Antdv Pro',
+      name: 'Antdv System',
       value: '2000',
       remark: '不管何时何地，做你想做的事永远都不嫌晚',
     },

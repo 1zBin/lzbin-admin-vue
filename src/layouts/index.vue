@@ -66,7 +66,7 @@ const layoutProps = computed(() =>
     <template #renderFooterLinks />
     <a-watermark
       class="h-full w-full flex flex-col flex-1"
-      :content="layoutSetting.watermark ? layoutSetting.title ?? 'Antdv Pro' : ' ' "
+      :content="layoutSetting.watermark ? layoutSetting.title ?? 'Antdv System' : ' ' "
     >
       <RouteView />
     </a-watermark>

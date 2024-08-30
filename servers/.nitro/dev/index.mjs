@@ -935,7 +935,7 @@ const _500$1 = /*#__PURE__*/Object.freeze({
 });
 
 const index$2 = eventHandler(() => {
-  return { nitro: "Hello Antdv Pro" };
+  return { nitro: "Hello Antdv System" };
 });
 
 const index$3 = /*#__PURE__*/Object.freeze({
@@ -1000,7 +1000,7 @@ const basicList_post = eventHandler(async (_event) => {
       content: "\u5E0C\u671B\u662F\u4EF6\u7F8E\u4E3D\u7684\u4E1C\u897F\uFF0C\u4E5F\u8BB8\u662F\u6700\u597D\u7684\u4E1C\u897F"
     },
     {
-      title: "Antdv Pro",
+      title: "Antdv System",
       link: "/logo.svg",
       percent: 80,
       status: "active",
@@ -1084,7 +1084,7 @@ const consultList_post = eventHandler(async (_event) => {
     },
     {
       id: 6,
-      name: "Antdv Pro",
+      name: "Antdv System",
       callNo: 2e3,
       desc: "\u4E0D\u7BA1\u4F55\u65F6\u4F55\u5730\uFF0C\u505A\u4F60\u60F3\u505A\u7684\u4E8B\u6C38\u8FDC\u90FD\u4E0D\u5ACC\u665A",
       status: "0" /* OFF */,
@@ -1166,7 +1166,7 @@ const crudTable_post = eventHandler(async (_event) => {
     },
     {
       id: 6,
-      name: "Antdv Pro",
+      name: "Antdv System",
       value: "2000",
       remark: "\u4E0D\u7BA1\u4F55\u65F6\u4F55\u5730\uFF0C\u505A\u4F60\u60F3\u505A\u7684\u4E8B\u6C38\u8FDC\u90FD\u4E0D\u5ACC\u665A"
     },

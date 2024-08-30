@@ -1,7 +1,7 @@
 <div align="center"> <a href="https://github.com/antdv-pro/antdv-pro"> <img alt="VbenAdmin Logo" width="200" height="200" src="./public/logo.svg"> </a> <br> <br>
 
 
-<h1>Antdv Pro</h1>
+<h1>Antdv System</h1>
 
 </div>
 

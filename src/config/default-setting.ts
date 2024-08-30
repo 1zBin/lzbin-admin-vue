@@ -26,7 +26,7 @@ export default {
   leftCollapsed: true,
   compactAlgorithm: false,
   headerHeight: 48,
-  copyright: 'Antdv Pro Team 2023',
+  copyright: 'Antdv System Team 2023',
   animationName: 'slide-fadein-right',
 } as LayoutSetting
 

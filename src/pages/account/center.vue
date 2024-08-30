@@ -44,7 +44,7 @@ interface ITeamDataItem {
 
 const teamData = ref<ITeamDataItem[]>([
   {
-    name: 'Antdv Pro',
+    name: 'Antdv System',
     link: '/logo.svg',
   },
   {
