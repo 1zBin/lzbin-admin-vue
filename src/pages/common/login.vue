@@ -2,7 +2,7 @@
 import { AlipayCircleFilled, LockOutlined, MobileOutlined, TaobaoCircleFilled, UserOutlined, WeiboCircleFilled } from '@ant-design/icons-vue'
 import { delayTimer } from '@v-c/utils'
 import { AxiosError } from 'axios'
-import GlobalLayoutFooter from '~/layouts/components/global-footer/index.vue'
+// import GlobalLayoutFooter from '~/layouts/components/global-footer/index.vue'
 import { loginApi } from '~/api/common/login'
 import { getQueryParam } from '~/utils/tools'
 import type { LoginMobileParams, LoginParams } from '~@/api/common/login'
@@ -121,7 +121,7 @@ onBeforeUnmount(() => {
               <img w-full h-full object-cover src="/logo.svg">
             </span>
             <span class="ant-pro-form-login-title">
-              Antdv Pro
+              Antdv System
             </span>
             <span class="ant-pro-form-login-desc">
               {{ t("pages.layouts.userLayout.title") }}
@@ -153,7 +153,7 @@ onBeforeUnmount(() => {
           <a-divider m-0 type="vertical" class="ant-pro-login-divider  min-h-[520px]" />
           <!-- 登录框右侧 -->
           <div class="ant-pro-form-login-main-right px-5 w-[335px] flex-center flex-col relative z-11">
-            <div class="text-center py-6 text-2xl">
+            <div class="text-center py-2 text-2xl">
               {{ t('pages.login.tips') }}
             </div>
             <a-form ref="formRef" :model="loginModel">
@@ -244,19 +244,20 @@ onBeforeUnmount(() => {
                 {{ t('pages.login.submit') }}
               </a-button>
             </a-form>
-            <a-divider>
+            <!-- 其他登录方式 -->
+            <!-- <a-divider>
               <span class="text-slate-500">{{ t('pages.login.loginWith') }}</span>
             </a-divider>
             <div class="ant-pro-form-login-other">
               <AlipayCircleFilled class="icon" />
               <TaobaoCircleFilled class="icon" />
               <WeiboCircleFilled class="icon" />
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
     </div>
-    <div py-24px px-50px fixed bottom-0 z-11 w-screen :data-theme="layoutSetting.theme" text-14px>
+    <!-- <div py-24px px-50px fixed bottom-0 z-11 w-screen :data-theme="layoutSetting.theme" text-14px>
       <GlobalLayoutFooter
         :copyright="layoutSetting.copyright" icp="鲁ICP备2023021414号-2"
       >
@@ -264,7 +265,7 @@ onBeforeUnmount(() => {
           <footer-links />
         </template>
       </GlobalLayoutFooter>
-    </div>
+    </div> -->
   </div>
 </template>
 

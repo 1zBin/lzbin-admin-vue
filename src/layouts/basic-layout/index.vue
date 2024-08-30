@@ -4,7 +4,7 @@ import SiderMenu from '../components/sider-menu/index.vue'
 import DrawerMenu from '../components/drawer-menu/index.vue'
 import Menu from '../components/menu/index.vue'
 import SplitMenu from '../components/menu/split-menu.vue'
-import GlobalFooter from '../components/global-footer/index.vue'
+// import GlobalFooter from '../components/global-footer/index.vue'
 import { proLayoutProps } from './typing'
 import { useLayoutProvider } from './context'
 
@@ -63,7 +63,7 @@ const contentCls = computed(() => {
             <slot />
           </div>
         </a-layout-content>
-        <a-layout-footer v-if="footer" style="background-color: transparent;">
+        <!-- <a-layout-footer v-if="footer" style="background-color: transparent;">
           <slot name="footerRender">
             <GlobalFooter :copyright="copyright">
               <template v-if="$slots.renderFooterLinks" #renderFooterLinks>
@@ -71,7 +71,7 @@ const contentCls = computed(() => {
               </template>
             </GlobalFooter>
           </slot>
-        </a-layout-footer>
+        </a-layout-footer> -->
       </a-layout>
     </a-layout>
     <DrawerMenu v-if="menu" />
