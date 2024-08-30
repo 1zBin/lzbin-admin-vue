@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AlipayCircleFilled, LockOutlined, MobileOutlined, TaobaoCircleFilled, UserOutlined, WeiboCircleFilled } from '@ant-design/icons-vue'
+import { LockOutlined, MobileOutlined, UserOutlined } from '@ant-design/icons-vue'
 import { delayTimer } from '@v-c/utils'
 import { AxiosError } from 'axios'
 // import GlobalLayoutFooter from '~/layouts/components/global-footer/index.vue'
