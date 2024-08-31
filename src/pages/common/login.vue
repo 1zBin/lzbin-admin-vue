@@ -257,7 +257,6 @@ onBeforeUnmount(() => {
         </div>
       </div>
     </div>
-    <!-- 底部Footer -->
     <!-- <div py-24px px-50px fixed bottom-0 z-11 w-screen :data-theme="layoutSetting.theme" text-14px>
       <GlobalLayoutFooter
         :copyright="layoutSetting.copyright" icp="鲁ICP备2023021414号-2"
