@@ -12,3 +12,6 @@ dist
 dist-ssr
 .output
 *.local
+
+.github
+.husky
