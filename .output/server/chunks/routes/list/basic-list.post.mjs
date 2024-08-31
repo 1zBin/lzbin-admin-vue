@@ -45,7 +45,7 @@ const basicList_post = eventHandler(async (_event) => {
       content: "\u5E0C\u671B\u662F\u4EF6\u7F8E\u4E3D\u7684\u4E1C\u897F\uFF0C\u4E5F\u8BB8\u662F\u6700\u597D\u7684\u4E1C\u897F"
     },
     {
-      title: "Antdv Pro",
+      title: "Antdv System",
       link: "/logo.svg",
       percent: 80,
       status: "active",

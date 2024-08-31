@@ -7,7 +7,7 @@ import 'node:fs';
 import 'node:url';
 
 const index = eventHandler(() => {
-  return { nitro: "Hello Antdv Pro" };
+  return { nitro: "Hello Antdv System" };
 });
 
 export { index as default };
