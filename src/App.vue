@@ -1,19 +1,23 @@
 <script setup lang="ts">
-import { useLayoutMenuProvide } from '~/components/page-container/context'
+import { useAppStore } from "@/stores";
+import zhCN from "ant-design-vue/es/locale/zh_CN";
+const appStore = useAppStore();
 
-const appStore = useAppStore()
-const { theme } = storeToRefs(appStore)
-const { antd } = useI18nLocale()
-const layoutMenu = useLayoutMenu()
-useLayoutMenuProvide(layoutMenu, appStore)
+const getPopupContainer = (trigger: any) => {
+  if (trigger) {
+    return trigger.parentNode;
+  } else {
+    return document.body;
+  }
+};
 </script>
 
 <template>
-  <a-config-provider :theme="theme" :locale="antd">
-    <a-app class="h-full font-chinese antialiased">
-      <TokenProvider>
-        <RouterView />
-      </TokenProvider>
-    </a-app>
+  <a-config-provider
+    :theme="appStore.theme"
+    :getPopupContainer="(getPopupContainer as any)"
+    :locale="zhCN"
+  >
+    <RouterView />
   </a-config-provider>
 </template>

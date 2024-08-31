@@ -7,13 +7,13 @@
     "skipLibCheck": true,
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "esModuleInterop": true,
     "noEmit": true,
     "jsx": "preserve",
-    "jsxImportSource": "vue",
 
     /* Linting */
     "strict": true,
@@ -25,10 +25,17 @@
     "paths": {
       "~@/*": ["src/*"],
       "~/*": ["src/*"],
-      "@/*": ["src/*"],
-      "~#/*": ["src/enums/*"],
+      "@/*": ["src/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "types/**/*.d.ts"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "types/**/*.d.ts",
+    "src/pages/slbs/certificate/components/ace-config.ts"
+  ],
+  "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

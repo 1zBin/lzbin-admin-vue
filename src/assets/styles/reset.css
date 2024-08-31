@@ -6,7 +6,6 @@ html {
   --bg-color: #fff;
   --hover-color:rgba(0,0,0,.025);
   --bg-color-container: #f0f2f5;
-  --c-shadow: 2px 0 8px 0 rgba(29,35,41,.05);
 }
 
 html.dark{
@@ -16,7 +15,6 @@ html.dark{
   --bg-color: rgb(36, 37, 37);
   --hover-color:rgb(42, 44, 55);
   --bg-color-container: rgb(42, 44, 44);
-  --c-shadow: rgba(13, 13, 13, 0.65) 0 2px 8px 0;
 }
 
 body{
@@ -36,3 +34,34 @@ body{
 *, :after, :before{
   box-sizing: border-box;
 }
+
+/* 信息提示层级 */
+.ant-message,
+.ant-notification {
+  z-index: 9999;
+}
+/* 下拉菜单，下拉框层级 */
+.ant-picker-dropdown,
+.ant-select-dropdown {
+  z-index: 990;
+}
+/* 图标选择器气泡弹窗去掉小三角形 */
+.icon-popover {
+  top: 24px !important;
+}
+.icon-popover > .ant-popover-content > .ant-popover-arrow {
+  display: none;
+}
+/* Vxe的下拉菜单，下拉框层级 */
+.vxe-pulldown--panel > .vxe-pulldown--panel-wrapper {
+  border-radius: 5px;
+}
+
+/* .dhcp-client-form-item {
+  margin-bottom: 12px;
+}
+.dhcp-client-form-item > .ant-form-row > .ant-form-item-label {
+  padding: 0;
+  display: flex;
+  align-items: center;
+} */
