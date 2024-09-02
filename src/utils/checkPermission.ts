@@ -1,8 +1,8 @@
-import { useMenuStore } from "@/stores";
+// import { useMenuStore } from "@/stores";
 
 export const checkPermission = (keys: string, arr?: any[]): boolean => {
   let flag = false;
-  const { menuSelf } = useMenuStore();
+  //   const { menuSelf } = useMenuStore();
 
   if (keys === "defaultTrue") {
     flag = true;
@@ -11,7 +11,8 @@ export const checkPermission = (keys: string, arr?: any[]): boolean => {
     if (arr && arr.length) {
       menus = arr;
     } else {
-      menus = menuSelf;
+      //   menus = menuSelf;
+      menus = [];
     }
     for (let i = 0; i < menus.length; i++) {
       const item = menus[i];

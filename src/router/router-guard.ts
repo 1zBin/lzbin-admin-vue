@@ -18,34 +18,6 @@ router.beforeEach(async (to, _from, next) => {
       const userStore = useUserStore();
       if (!userStore.routerData) {
         let currentRoute = await userStore.generateDynamicRoutes();
-        if (currentRoute.children && currentRoute.children.length) {
-          if (
-            currentRoute.children.findIndex(
-              (item: any) => item.path == "/person"
-            ) === -1
-          ) {
-            currentRoute.children = [
-              ...currentRoute.children,
-              {
-                id: 7,
-                parentId: "0",
-                path: "/person",
-                name: "Person",
-                hidden: false,
-                sort: 4,
-                meta: {
-                  keepAlive: false,
-                  defaultMenu: false,
-                  title: "个人信息",
-                  icon: "message",
-                  closeTab: false,
-                },
-                menuId: "7",
-                component: () => import(`/src/pages/person/index.vue`),
-              },
-            ];
-          }
-        }
         router.addRoute(currentRoute);
         next({
           ...to,
