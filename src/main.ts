@@ -10,7 +10,7 @@ import "ant-design-vue/dist/reset.css";
 import "~/assets/styles/reset.css";
 import "uno.css";
 
-import { setupProdMockServer } from "../mock/_createProductionServer";
+import { setupProdMockServer } from "../mock/config/_createProductionServer";
 setupProdMockServer();
 
 const pinia = createPinia();
