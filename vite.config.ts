@@ -6,12 +6,8 @@ import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import Unocss from "unocss/vite";
 import AntdvResolver from "antdv-component-resolver";
-import {
-  createStyleImportPlugin,
-  VxeTableResolve,
-} from "vite-plugin-style-import";
 import { viteMockServe } from "vite-plugin-mock"; // 引入 mock 插件提供的方法
-import { resolve } from "path";
+import { resolve } from "node:path";
 
 const baseSrc = fileURLToPath(new URL("./src", import.meta.url));
 
@@ -21,21 +17,16 @@ export default defineConfig(({ command }) => {
       vue(), // Vue 插件
       vueJsx(),
       AutoImport({
-        // 自动导入插件
         imports: ["vue", "vue-router", "vue-i18n", "@vueuse/core", "pinia"],
         dts: "types/auto-imports.d.ts",
         dirs: ["src/stores", "src/composables"],
       }),
       Components({
-        // Vue 组件自动导入插件
         resolvers: [AntdvResolver()],
         dts: "types/components.d.ts",
         dirs: ["src/components"],
       }),
       Unocss(), // Unocss 样式框架插件
-      createStyleImportPlugin({
-        resolves: [VxeTableResolve()],
-      }),
       // mock 配置项
       viteMockServe({
         mockPath: "mock",
@@ -77,6 +68,10 @@ export default defineConfig(({ command }) => {
           find: "@",
           replacement: baseSrc,
         },
+        {
+          find: "~#",
+          replacement: resolve(baseSrc, "./enums"),
+        },
       ],
     },
     build: {
@@ -85,8 +80,8 @@ export default defineConfig(({ command }) => {
         output: {
           manualChunks: {
             // 手动指定代码分块
-            vue: ["vue", "vue-router", "pinia", "@vueuse/core"],
-            antd: ["ant-design-vue", "@ant-design/icons-vue"],
+            vue: ["vue", "vue-router", "pinia", "vue-i18n", "@vueuse/core"],
+            antd: ["ant-design-vue", "@ant-design/icons-vue", "dayjs"],
             // lodash: ["loadsh-es"],
           },
         },

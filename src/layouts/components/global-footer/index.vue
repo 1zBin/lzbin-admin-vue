@@ -1,8 +1,13 @@
 <script setup lang="ts">
-import './index.less'
 import { CopyrightCircleOutlined } from '@ant-design/icons-vue'
+
+defineOptions({
+  name: 'GlobalFooter',
+})
+
 defineProps<{
   copyright?: string
+  icp?: string
 }>()
 
 const prefixCls = shallowRef('ant-pro-global-footer')
@@ -14,7 +19,11 @@ const prefixCls = shallowRef('ant-pro-global-footer')
       <slot name="renderFooterLinks" />
     </div>
     <div v-if="copyright" :class="`${prefixCls}-copyright`">
-      <CopyrightCircleOutlined /> {{ copyright }}
+      <a v-if="icp" href="https://beian.miit.gov.cn/" target="_blank">{{ icp }}</a> <CopyrightCircleOutlined /> {{ copyright }}
     </div>
   </div>
 </template>
+
+<style lang="less">
+@import "index";
+</style>

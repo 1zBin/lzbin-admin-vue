@@ -1,71 +1,55 @@
 <script setup lang="ts">
-import errorUserAvatar from "@/assets/images/errorUserAvatar.png";
-import { useLogout, useUserStore } from "@/stores";
-import { Modal } from "ant-design-vue";
-import { RouterLink } from "vue-router";
+import { LogoutOutlined, ProfileOutlined, UserOutlined } from '@ant-design/icons-vue'
 
-const { userInfo } = useUserStore();
-const avatar = ref("");
-const nickName = ref(userInfo.nickName);
-
-const { logoutFn } = useLogout();
-const { clearAllTab } = useMultiTab();
-
+const message = useMessage()
+const userStore = useUserStore()
+const multiTabStore = useMultiTab()
+const layoutMenuStore = useLayoutMenu()
+const router = useRouter()
+const { avatar, nickname } = storeToRefs(userStore)
 async function handleClick({ key }: any) {
-  if (key === "logout") {
-    Modal.confirm({
-      title: "温馨提示",
-      content: "你确认退出Antdv System吗?",
-      okText: "确认",
-      cancelText: "取消",
-      onOk() {
-        logoutFn();
-        clearAllTab();
-      },
-    });
+  if (key === 'logout') {
+    const hide = message.loading('退出登录...', 0)
+    try {
+      await userStore.logout()
+    }
+    finally {
+      hide()
+      message.success('退出登录成功', 3)
+      router.push({
+        path: '/login',
+      }).then(() => {
+        multiTabStore.clear()
+        layoutMenuStore.clear()
+      })
+    }
   }
 }
-
-onMounted(async () => {
-  console.log("userInfo", userInfo);
-
-  if (userInfo.avatar) {
-    avatar.value = userInfo.avatar;
-  }
-});
-
-// 图片加载错误则用本地图片
-const loadErrorFn = () => {
-  avatar.value = errorUserAvatar;
-};
 </script>
 
 <template>
   <a-dropdown>
-    <span
-      hover="bg-[var(--hover-color)]"
-      flex
-      items-center
-      h-48px
-      px-12px
-      cursor-pointer
-      class="transition-all-300"
-    >
-      <a-avatar
-        :src="avatar"
-        :loadError="(loadErrorFn as any)"
-        mr-8px
-        size="small"
-      />
-      <span class="anticon">{{ nickName }}</span>
+    <span hover="bg-[var(--hover-color)]" flex items-center h-48px px-12px cursor-pointer class="transition-all-300">
+      <a-avatar :src="avatar" mr-8px size="small" />
+      <span class="anticon">{{ nickname }}</span>
     </span>
     <template #overlay>
       <a-menu @click="handleClick">
-        <a-menu-item key="account-settings">
+        <a-menu-item key="0">
+          <template #icon>
+            <UserOutlined />
+          </template>
+          <RouterLink to="/account/center">
+            个人中心
+          </RouterLink>
+        </a-menu-item>
+        <a-menu-item key="1">
           <template #icon>
             <ProfileOutlined />
           </template>
-          <RouterLink to="/account/settings"> 个人设置 </RouterLink>
+          <RouterLink to="/account/settings">
+            个人设置
+          </RouterLink>
         </a-menu-item>
         <a-menu-divider />
         <a-menu-item key="logout">
@@ -78,13 +62,3 @@ const loadErrorFn = () => {
     </template>
   </a-dropdown>
 </template>
-
-<style scoped lang="less">
-.roleMenu {
-  &:hover {
-    .anticon-swap {
-      color: #1677ff;
-    }
-  }
-}
-</style>

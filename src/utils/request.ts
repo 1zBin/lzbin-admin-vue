@@ -1,141 +1,194 @@
-import router from "@/router";
-import { useLogout, useToken } from "@/stores";
-import { message } from "ant-design-vue";
-import type { AxiosRequestConfig } from "axios";
+import type {
+  AxiosError,
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+} from "axios";
 import axios from "axios";
-console.log("ENV", import.meta.env);
-
-// 创建axios实例
-const timeout = 5000; // 请求超时时间
-const instance = axios.create({
-  baseURL: "/api",
-  timeout: timeout,
-});
-let requestTime = 0;
-
-// 添加请求拦截器
-instance.interceptors.request.use(
-  (config) => {
-    const { token } = useToken();
-    const { logoutFn } = useLogout();
-    // 请求拦截，统一设置token
-    if (token) {
-      const time = 60 * 60000; // 前端操作token失效时间1小时，自动退出登录
-      const loginTime = Number(localStorage.getItem("loginTime"));
-      const curTime = Date.now();
-      const dir = curTime - loginTime;
-      if (dir > time) {
-        // 退出登录
-        logoutFn();
-        // 跳转到登录页面
-        router.push("/Login");
-        // 结束请求 报错信息
-        return Promise.reject(new Error("登录超时"));
-      } else {
-        // 在限定时间内调用token的时候都会重新存一次时间戳
-        localStorage.setItem("loginTime", Date.now().toString());
-        // 保存请求时间
-        requestTime = Date.now();
-      }
-      // 请求头设置token
-      config.headers["token"] = token;
-      // console.log("网络层面成功", config);
-    }
-    return config;
-  },
-  (error) => {
-    // console.log("网络层面失败", error);
-    message.error(error);
-    return Promise.reject(error);
-  }
-);
-
-// 添加响应拦截器
-instance.interceptors.response.use(
-  (response: any) => {
-    // 如果请求成功成功 2xx 就直接返回 data 中的数据
-    // console.log("数据层面成功", response);
-    return response;
-  },
-  (error) => {
-    // console.error("数据层面失败", error.response);
-    // 对响应错误做点什么
-    if (!error.response) {
-      const responseTime = Date.now();
-      const dir = responseTime - requestTime;
-      if (dir > timeout) {
-        message.error("请求超时");
-      } else {
-        // 网络错误，response 没有信息
-        message.error("网络错误，请换个网络环境");
-      }
-    } else {
-      // 对响应错误做点什么 400 401 404 500 ...
-      // 通用错误，通用提示
-      message.error(error.response.status + " " + error.response.statusText);
-    }
-    return Promise.reject(error);
-  }
-);
-
-export default instance;
+import { AxiosLoading } from "./loading";
+import {
+  STORAGE_AUTHORIZE_KEY,
+  useAuthorization,
+} from "~/composables/authorization";
+import { ContentTypeEnum, RequestEnum } from "~#/http-enum";
+import router from "~/router";
 
 export interface ResponseBody<T = any> {
-  data: {
-    code: number;
-    msg: string;
-    data: T;
-  };
+  code: number;
+  data?: T;
+  msg: string;
 }
 
-export const useGet = <R = any, T = any>(
+export interface RequestConfigExtra {
+  token?: boolean;
+  customDev?: boolean;
+  loading?: boolean;
+}
+const instance: AxiosInstance = axios.create({
+  baseURL: import.meta.env.VITE_APP_BASE_API ?? "/",
+  timeout: 60000,
+  headers: { "Content-Type": ContentTypeEnum.JSON },
+});
+const axiosLoading = new AxiosLoading();
+async function requestHandler(
+  config: InternalAxiosRequestConfig & RequestConfigExtra
+): Promise<InternalAxiosRequestConfig> {
+  // 处理请求前的url
+  if (
+    import.meta.env.DEV &&
+    import.meta.env.VITE_APP_BASE_API_DEV &&
+    import.meta.env.VITE_APP_BASE_URL_DEV &&
+    config.customDev
+  ) {
+    //  替换url的请求前缀baseUrl
+    config.baseURL = import.meta.env.VITE_APP_BASE_API_DEV;
+  }
+  const token = useAuthorization();
+
+  if (token.value && config.token !== false)
+    config.headers.set(STORAGE_AUTHORIZE_KEY, token.value);
+
+  // 增加多语言的配置
+  const { locale } = useI18nLocale();
+  config.headers.set("Accept-Language", locale.value ?? "zh-CN");
+  if (config.loading) axiosLoading.addLoading();
+  return config;
+}
+
+function responseHandler(
+  response: any
+): ResponseBody<any> | AxiosResponse<any> | Promise<any> | any {
+  return response.data;
+}
+
+function errorHandler(error: AxiosError): Promise<any> {
+  const token = useAuthorization();
+  const notification = useNotification();
+
+  if (error.response) {
+    const { data, status, statusText } =
+      error.response as AxiosResponse<ResponseBody>;
+    if (status === 401) {
+      notification?.error({
+        message: "401",
+        description: data?.msg || statusText,
+        duration: 3,
+      });
+      /**
+       * 这里处理清空用户信息和token的逻辑，后续扩展
+       */
+      token.value = null;
+      router
+        .push({
+          path: "/login",
+          query: {
+            redirect: router.currentRoute.value.fullPath,
+          },
+        })
+        .then(() => {});
+    } else if (status === 403) {
+      notification?.error({
+        message: "403",
+        description: data?.msg || statusText,
+        duration: 3,
+      });
+    } else if (status === 500) {
+      notification?.error({
+        message: "500",
+        description: data?.msg || statusText,
+        duration: 3,
+      });
+    } else {
+      notification?.error({
+        message: "服务错误",
+        description: data?.msg || statusText,
+        duration: 3,
+      });
+    }
+  }
+  return Promise.reject(error);
+}
+interface AxiosOptions<T> {
+  url: string;
+  params?: T;
+  data?: T;
+}
+instance.interceptors.request.use(requestHandler);
+
+instance.interceptors.response.use(responseHandler, errorHandler);
+
+export default instance;
+function instancePromise<R = any, T = any>(
+  options: AxiosOptions<T> & RequestConfigExtra
+): Promise<ResponseBody<R>> {
+  const { loading } = options;
+  return new Promise((resolve, reject) => {
+    instance
+      .request(options)
+      .then((res) => {
+        resolve(res as any);
+      })
+      .catch((e: Error | AxiosError) => {
+        reject(e);
+      })
+      .finally(() => {
+        if (loading) axiosLoading.closeLoading();
+      });
+  });
+}
+export function useGet<R = any, T = any>(
   url: string,
   params?: T,
-  config?: AxiosRequestConfig
-): Promise<ResponseBody<R>> => {
-  return instance.request({
+  config?: AxiosRequestConfig & RequestConfigExtra
+): Promise<ResponseBody<R>> {
+  const options = {
     url,
     params,
-    method: "GET",
+    method: RequestEnum.GET,
     ...config,
-  });
-};
+  };
+  return instancePromise<R, T>(options);
+}
 
-export const usePost = <R = any, T = any>(
+export function usePost<R = any, T = any>(
   url: string,
   data?: T,
-  config?: AxiosRequestConfig
-): Promise<ResponseBody<R>> => {
-  return instance.request({
+  config?: AxiosRequestConfig & RequestConfigExtra
+): Promise<ResponseBody<R>> {
+  const options = {
     url,
     data,
-    method: "POST",
+    method: RequestEnum.POST,
     ...config,
-  });
-};
+  };
+  return instancePromise<R, T>(options);
+}
 
-export const usePut = <R = any, T = any>(
+export function usePut<R = any, T = any>(
   url: string,
   data?: T,
-  config?: AxiosRequestConfig
-): Promise<ResponseBody<R>> => {
-  return instance.request({
+  config?: AxiosRequestConfig & RequestConfigExtra
+): Promise<ResponseBody<R>> {
+  const options = {
     url,
     data,
-    method: "PUT",
+    method: RequestEnum.PUT,
     ...config,
-  });
-};
+  };
+  return instancePromise<R, T>(options);
+}
 
-export const useDelete = <R = any, T = any>(
+export function useDelete<R = any, T = any>(
   url: string,
   data?: T,
-  config?: AxiosRequestConfig
-): Promise<ResponseBody<R>> => {
-  return instance.request({
+  config?: AxiosRequestConfig & RequestConfigExtra
+): Promise<ResponseBody<R>> {
+  const options = {
     url,
     data,
-    method: "DELETE",
+    method: RequestEnum.DELETE,
     ...config,
-  });
-};
+  };
+  return instancePromise<R, T>(options);
+}

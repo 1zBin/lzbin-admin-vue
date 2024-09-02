@@ -1,11 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineOptions({
+  name: 'RouteView',
+})
+</script>
 
 <template>
-  <RouterView>
-    <template #default="{ Component, route }">
-      <Transition appear name="slide-fadein-right" mode="out-in">
-        <component :is="Component" :key="route.fullPath" />
-      </Transition>
-    </template>
-  </RouterView>
+  <RouterView />
 </template>

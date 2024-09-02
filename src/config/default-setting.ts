@@ -1,53 +1,55 @@
-import type { LayoutSetting } from "@/stores/app";
+import type { LayoutSetting } from '~@/stores/app'
 
 export default {
-  title: "Antdv System",
-  theme: "light", // 主题风格
-  logo: "https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg",
-  collapsed: false, // 菜单栏是否折叠
-  drawerVisible: false, // 右侧工具栏是否隐藏
-  colorPrimary: "#1677FF", // 主题色
-  layout: "side", // 导航模式
-  contentWidth: "Fluid", // 内容区域宽度
-  fixedHeader: false, // 固定Header
-  fixedSider: true, // 固定侧边菜单
-  splitMenus: false, // 自动分割菜单
-  header: true, // 顶栏
-  menu: true, // 菜单
-  menuHeader: true, // 菜单头
-  footer: false, // 页脚
-  colorWeak: false, // 色弱
-  multiTab: true, // 多页标签
-  multiTabFixed: false, // 固定多页标签
-  headerHeight: 48, // 顶部高度
-  copyright: "", // 页脚的版权信息
-} as LayoutSetting;
+  title: 'Antdv System',
+  theme: 'light',
+  logo: '/logo.svg',
+  collapsed: false,
+  drawerVisible: false,
+  colorPrimary: '#1677FF',
+  layout: 'mix',
+  contentWidth: 'Fluid',
+  fixedHeader: false,
+  fixedSider: true,
+  splitMenus: false,
+  header: true,
+  menu: true,
+  watermark: false,
+  menuHeader: true,
+  footer: false,
+  colorWeak: false,
+  colorGray: false,
+  multiTab: true,
+  multiTabFixed: false,
+  keepAlive: true,
+  accordionMode: false,
+  leftCollapsed: true,
+  compactAlgorithm: false,
+  headerHeight: 48,
+  copyright: 'Antdv System Team 2023',
+  animationName: 'slide-fadein-right',
+} as LayoutSetting
 
 export const animationNameList = [
   {
-    label: "None",
-    value: "none",
+    label: 'None',
+    value: 'none',
   },
   {
-    label: "Fadein Up",
-    value: "slide-fadein-up",
+    label: 'Fadein Up',
+    value: 'slide-fadein-up',
   },
   {
-    label: "Fadein Right",
-    value: "slide-fadein-right",
+    label: 'Fadein Right',
+    value: 'slide-fadein-right',
   },
   {
-    label: "Zoom Fadein",
-    value: "zoom-fadein",
+    label: 'Zoom Fadein',
+    value: 'zoom-fadein',
   },
   {
-    label: "Fadein",
-    value: "fadein",
+    label: 'Fadein',
+    value: 'fadein',
   },
-];
-export type AnimationNameValueType =
-  | "none"
-  | "slide-fadein-up"
-  | "slide-fadein-right"
-  | "zoom-fadein"
-  | "fadein";
+]
+export type AnimationNameValueType = 'none' | 'slide-fadein-up' | 'slide-fadein-right' | 'zoom-fadein' | 'fadein'

@@ -1,30 +1,32 @@
 <script setup lang="ts">
-defineProps<{
-  colorWeak?: boolean;
-}>();
-const emit = defineEmits(["changeSetting"]);
-const list = computed(() => [
-  {
-    title: "色弱模式",
-    key: "colorWeak",
-    disabled: false,
-    disabledReason: "",
-  },
-]);
-const handleChangeWeak = (value: boolean) => {
-  emit("changeSetting", "colorWeak", value);
+import type { CheckedType } from '~@/layouts/basic-layout/typing'
 
-  const dom = document.querySelector("body");
-  if (dom) {
-    if (value) {
-      dom.dataset.prosettingdrawer = dom.style.filter;
-      dom.style.filter = "invert(80%)";
-    } else {
-      dom.style.filter = dom.dataset.prosettingdrawer || "none";
-      delete dom.dataset.prosettingdrawer;
-    }
-  }
-};
+const props = defineProps<{
+  colorWeak?: boolean
+  colorGray?: boolean
+  t?: (key: string, ...args: any[]) => string
+}>()
+const emit = defineEmits(['changeSetting'])
+const list = computed(() => ([
+  {
+    title: 'weakmode',
+    key: 'colorWeak',
+    disabled: false,
+    disabledReason: '',
+  },
+  {
+    title: 'graymode',
+    key: 'colorGray',
+    disabled: false,
+    disabledReason: '',
+  },
+]))
+function handleToggleChange(key: string, value: CheckedType) {
+  emit('changeSetting', key, value)
+}
+function isToggleChecked(key: string) {
+  return Reflect.get(props, key)
+}
 </script>
 
 <template>
@@ -34,13 +36,13 @@ const handleChangeWeak = (value: boolean) => {
         <template #actions>
           <a-switch
             size="small"
-            :checked="colorWeak"
+            :checked="isToggleChecked(item.key)"
             :disabled="item.disabled"
-            @update:checked="handleChangeWeak as any"
+            @update:checked="handleToggleChange(item.key, $event)"
           />
         </template>
         <span :style="{ opacity: item.disabled ? '0.5' : '1' }">
-          {{ item.title }}
+          {{ t?.(`app.setting.${item.title}`, item.title) ?? item.title }}
         </span>
       </a-list-item>
     </template>
