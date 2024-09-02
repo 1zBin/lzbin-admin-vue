@@ -22,7 +22,7 @@ export const useUserStore = defineStore(
     const removeUserInfo = () => (userInfo.value = {});
 
     const generateRoutes = async () => {
-      // const menus = await getMenus(); // 获取真实菜单数据
+      // const menus = await getMenus(); // 获取菜单数据
       menuData.value = genRoutes(dynamicRoutes);
 
       const currentRoute = {
