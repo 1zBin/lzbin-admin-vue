@@ -827,26 +827,26 @@
     kolorist "^1.8.0"
     local-pkg "^0.4.3"
 
-"@intlify/core-base@9.6.2":
-  version "9.6.2"
-  resolved "https://registry.npmmirror.com/@intlify/core-base/-/core-base-9.6.2.tgz"
-  integrity sha512-ci0j2nbEL/pamvqgcCqyIVeQ3LS41F1IRqI5rCBNnpSp0FjNnH8bpha8R3OifkhqatzlP4wGOuN/UqfLYVDv7g==
+"@intlify/core-base@9.14.0":
+  version "9.14.0"
+  resolved "https://mirrors.cloud.tencent.com/npm/@intlify/core-base/-/core-base-9.14.0.tgz"
+  integrity sha512-zJn0imh9HIsZZUtt9v8T16PeVstPv6bP2YzlrYJwoF8F30gs4brZBwW2KK6EI5WYKFi3NeqX6+UU4gniz5TkGg==
   dependencies:
-    "@intlify/message-compiler" "9.6.2"
-    "@intlify/shared" "9.6.2"
+    "@intlify/message-compiler" "9.14.0"
+    "@intlify/shared" "9.14.0"
 
-"@intlify/message-compiler@9.6.2":
-  version "9.6.2"
-  resolved "https://registry.npmmirror.com/@intlify/message-compiler/-/message-compiler-9.6.2.tgz"
-  integrity sha512-kgZQL9zeJDeEB5vvD93Y++HvFUELnT48PjnpfCcF3EJaLLVs9he8IzODiNK42Z40lWbFyja0SXJZjsalybQygA==
+"@intlify/message-compiler@9.14.0":
+  version "9.14.0"
+  resolved "https://mirrors.cloud.tencent.com/npm/@intlify/message-compiler/-/message-compiler-9.14.0.tgz"
+  integrity sha512-sXNsoMI0YsipSXW8SR75drmVK56tnJHoYbPXUv2Cf9lz6FzvwsosFm6JtC1oQZI/kU+n7qx0qRrEWkeYFTgETA==
   dependencies:
-    "@intlify/shared" "9.6.2"
+    "@intlify/shared" "9.14.0"
     source-map-js "^1.0.2"
 
-"@intlify/shared@9.6.2":
-  version "9.6.2"
-  resolved "https://registry.npmmirror.com/@intlify/shared/-/shared-9.6.2.tgz"
-  integrity sha512-9KBcXmJNxElp7QMnU8V0/tScTOitDqyFi4HceEZqJyyDkMi8K5DBPMTIuXIAMmtMlXpe/nj5pke7tRw97VeQRA==
+"@intlify/shared@9.14.0":
+  version "9.14.0"
+  resolved "https://mirrors.cloud.tencent.com/npm/@intlify/shared/-/shared-9.14.0.tgz"
+  integrity sha512-r+N8KRQL7LgN1TMTs1A2svfuAU0J94Wu9wWdJVJqYsoMMLIeJxrPjazihfHpmJqfgZq0ah3Y9Q4pgWV2O90Fyg==
 
 "@jridgewell/gen-mapping@^0.3.0", "@jridgewell/gen-mapping@^0.3.2":
   version "0.3.3"
@@ -6081,13 +6081,13 @@ vue-eslint-parser@^9.3.1:
     lodash "^4.17.21"
     semver "^7.3.6"
 
-vue-i18n@^9.2.2:
-  version "9.6.2"
-  resolved "https://registry.npmmirror.com/vue-i18n/-/vue-i18n-9.6.2.tgz"
-  integrity sha512-J43grTQjPR8LCUxvx3mkoM+11xhTnej1Al4lvJCEeKmQqf8eqbuYPQb54HXnEg/UzZyaxLBAwPAUTbrZ8V7hcg==
+vue-i18n@^9.14.0:
+  version "9.14.0"
+  resolved "https://mirrors.cloud.tencent.com/npm/vue-i18n/-/vue-i18n-9.14.0.tgz"
+  integrity sha512-LxmpRuCt2rI8gqU+kxeflRZMQn4D5+4M3oP3PWZdowW/ePJraHqhF7p4CuaME52mUxdw3Mmy2yAUKgfZYgCRjA==
   dependencies:
-    "@intlify/core-base" "9.6.2"
-    "@intlify/shared" "9.6.2"
+    "@intlify/core-base" "9.14.0"
+    "@intlify/shared" "9.14.0"
     "@vue/devtools-api" "^6.5.0"
 
 vue-router@^4.1.6:

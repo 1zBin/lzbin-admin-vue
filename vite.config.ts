@@ -24,7 +24,7 @@ export default defineConfig(({ command }) => {
         // 自动导入插件
         imports: ["vue", "vue-router", "vue-i18n", "@vueuse/core", "pinia"],
         dts: "types/auto-imports.d.ts",
-        dirs: ["src/composables"],
+        dirs: ["src/stores", "src/composables"],
       }),
       Components({
         // Vue 组件自动导入插件

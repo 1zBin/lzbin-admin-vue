@@ -57,7 +57,9 @@ export default [
       const token = request.headers.token;
 
       // 查看用户信息是否包含有次token用户
-      const userInfo = createUserList().find((item) => item.token === token);
+      const userInfo = createUserList().find(
+        (item) => item.token === token
+      )?.userInfo;
 
       // 返回失败信息
       if (!userInfo) {

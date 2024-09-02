@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { useAppStore, useLogin } from "@/stores";
+import { useLogin } from "@/stores";
 import type { LoginParams } from "@/types";
 import { message } from "ant-design-vue";
 import { delayTimer } from "@v-c/utils";
 import pageBubble from "@/utils/page-bubble";
 import _ from "lodash";
+
+const { t } = useI18nLocale();
 
 const bubbleCanvas = ref<HTMLCanvasElement>();
 const appStore = useAppStore();
@@ -131,8 +133,8 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="login-container">
-    <div h-screen w-screen absolute>
-      <canvas ref="bubbleCanvas" absolute z-1 />
+    <div class="h-screen w-screen absolute">
+      <canvas ref="bubbleCanvas" class="absolute z-1" />
     </div>
     <div class="login-content" flex justify-center items-center>
       <div class="ant-pro-form-login-main">
@@ -140,16 +142,18 @@ onBeforeUnmount(() => {
         <div flex justify-between items-center h-15 px-4 mb-2px>
           <div>
             <span class="ant-pro-form-login-logo">
-              <!-- <img w-full h-full object-cover src="/logo.svg" /> -->
+              <img class="w-[40px] h-[40px] object-cover" src="/logo.svg" />
             </span>
-            <span class="ant-pro-form-login-title"> Antdv System </span>
+            <span class="ant-pro-form-login-title"> Antdv Pro </span>
             <span class="ant-pro-form-login-desc">
-              {{ "Antdv System" }}
+              {{ t("pages.layouts.userLayout.title") }}
             </span>
           </div>
-          <div class="login-lang flex-center relative z-11">
+          <div
+            class="login-lang flex justify-between items-center relative z-11"
+          >
             <span
-              class="flex-center cursor-pointer text-16px"
+              class="cursor-pointer text-16px"
               @click="
                 appStore.toggleTheme(
                   layoutSetting.theme === 'dark' ? 'light' : 'dark'
@@ -164,9 +168,10 @@ onBeforeUnmount(() => {
                 <carbon-sun />
               </template>
             </span>
+            <SelectLang />
           </div>
         </div>
-        <a-divider m-0 />
+        <a-divider class="m-0" />
         <!-- 登录主体 -->
         <div class="box-border flex min-h-[520px]">
           <!-- 登录框左侧 -->
@@ -323,7 +328,12 @@ onBeforeUnmount(() => {
                     >返回登录</a
                   >
                 </div>
-                <a style="color: coral" @click="forgetFn()">忘记密码 ?</a>
+                <a
+                  v-show="loginModel.type === 'account'"
+                  style="color: coral"
+                  @click="forgetFn()"
+                  >忘记密码 ?</a
+                >
               </div>
 
               <!-- 底部按钮 -->
@@ -370,14 +380,6 @@ onBeforeUnmount(() => {
   height: 40px;
   line-height: 44px;
 }
-
-//.login-content {
-// position: absolute;
-// top: 0;
-// left: 0;
-// right: 0;
-// bottom: 0;
-//}
 
 .ant-pro-form-login-container {
   display: flex;

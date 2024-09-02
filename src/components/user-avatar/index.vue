@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import errorUserAvatar from "@/assets/images/errorUserAvatar.png";
-import { useLogout, useUserStore, useMultiTab } from "@/stores";
+import { useLogout, useUserStore } from "@/stores";
 import { Modal } from "ant-design-vue";
 import { RouterLink } from "vue-router";
 
@@ -10,20 +10,25 @@ const nickName = ref(userInfo.nickName);
 
 const { logoutFn } = useLogout();
 const { clearAllTab } = useMultiTab();
-const logout = () => {
-  Modal.confirm({
-    title: "温馨提示",
-    content: "你确认退出Antdv System吗?",
-    okText: "确认",
-    cancelText: "取消",
-    onOk() {
-      logoutFn();
-      clearAllTab();
-    },
-  });
-};
+
+async function handleClick({ key }: any) {
+  if (key === "logout") {
+    Modal.confirm({
+      title: "温馨提示",
+      content: "你确认退出Antdv System吗?",
+      okText: "确认",
+      cancelText: "取消",
+      onOk() {
+        logoutFn();
+        clearAllTab();
+      },
+    });
+  }
+}
 
 onMounted(async () => {
+  console.log("userInfo", userInfo);
+
   if (userInfo.avatar) {
     avatar.value = userInfo.avatar;
   }
@@ -55,16 +60,15 @@ const loadErrorFn = () => {
       <span class="anticon">{{ nickName }}</span>
     </span>
     <template #overlay>
-      <a-menu>
-        <a-menu-item key="person">
+      <a-menu @click="handleClick">
+        <a-menu-item key="account-settings">
           <template #icon>
-            <UserOutlined />
+            <ProfileOutlined />
           </template>
-          <RouterLink to="/person">
-            {{ "个人中心" }}
-          </RouterLink>
+          <RouterLink to="/account/settings"> 个人设置 </RouterLink>
         </a-menu-item>
-        <a-menu-item key="logout" @click="logout">
+        <a-menu-divider />
+        <a-menu-item key="logout">
           <template #icon>
             <LogoutOutlined />
           </template>

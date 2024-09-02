@@ -1,4 +1,4 @@
-import type { LayoutSetting } from "@/stores";
+import type { LayoutSetting } from "@/stores/app";
 
 export default {
   title: "Antdv System",
@@ -22,3 +22,32 @@ export default {
   headerHeight: 48, // 顶部高度
   copyright: "", // 页脚的版权信息
 } as LayoutSetting;
+
+export const animationNameList = [
+  {
+    label: "None",
+    value: "none",
+  },
+  {
+    label: "Fadein Up",
+    value: "slide-fadein-up",
+  },
+  {
+    label: "Fadein Right",
+    value: "slide-fadein-right",
+  },
+  {
+    label: "Zoom Fadein",
+    value: "zoom-fadein",
+  },
+  {
+    label: "Fadein",
+    value: "fadein",
+  },
+];
+export type AnimationNameValueType =
+  | "none"
+  | "slide-fadein-up"
+  | "slide-fadein-right"
+  | "zoom-fadein"
+  | "fadein";

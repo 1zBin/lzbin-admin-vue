@@ -30,6 +30,8 @@ export const useLogin = defineStore("login", () => {
       localStorage.setItem("loginTime", Date.now().toString());
       updateToken(res.data.data.token);
       const result = await getUserInfo();
+      console.log("result", result);
+
       setUserInfo(result.data.data.userInfo);
       // 跳转到首页
       router.push("/");

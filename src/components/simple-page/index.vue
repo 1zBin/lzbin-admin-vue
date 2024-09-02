@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { delayTimer, isFunction } from "@v-c/utils";
 import type { VNodeChild } from "vue";
-import { useAppStore, useMultiTab } from "@/stores";
 import { useLayoutState } from "~/layouts/basic-layout/context";
 import { useRoute, useRouter } from "vue-router";
 

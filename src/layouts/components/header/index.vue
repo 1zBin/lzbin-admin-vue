@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import type { CSSProperties } from "vue";
-import GlobalHeader from "../global-header/index.vue";
-import { useLayoutState } from "../../basic-layout/context";
+import type { CSSProperties } from 'vue'
+import GlobalHeader from '../global-header/index.vue'
+import { useLayoutState } from '../../basic-layout/context'
+
 const {
   headerHeight,
   fixedHeader,
@@ -10,45 +11,50 @@ const {
   collapsed,
   collapsedWidth,
   siderWidth,
-} = useLayoutState();
+  menu,
+  splitMenus,
+  selectedMenus,
+} = useLayoutState()
 
 const headerStyle = computed<CSSProperties>(() => {
   const defaultStyle: CSSProperties = {
     height: `${headerHeight.value}px`,
     lineHeight: `${headerHeight.value}px`,
     paddingInline: 0,
-  };
-  if (fixedHeader.value || layout.value === "mix") {
-    // 顶部栏层级
-    defaultStyle.zIndex = 999;
-    defaultStyle.width = "100%";
-    defaultStyle.right = 0;
   }
-  if (layout.value === "side") {
-    console.log("side");
+  if (fixedHeader.value || layout.value === 'mix') {
+    defaultStyle.zIndex = 100
+    defaultStyle.width = '100%'
+    defaultStyle.right = 0
+  }
+
+  if (layout.value === 'side' && menu.value) {
     if (!isMobile.value && fixedHeader.value) {
-      const width = collapsed.value ? collapsedWidth.value : siderWidth.value;
-      defaultStyle.width = `calc(100% - ${width}px)`;
-      defaultStyle.zIndex = 999;
-    } else {
-      defaultStyle.zIndex = 20;
+      const width = collapsed.value ? collapsedWidth.value : siderWidth.value
+      defaultStyle.width = `calc(100% - ${width}px)`
     }
+    defaultStyle.zIndex = 19
   }
 
-  return defaultStyle;
-});
+  return defaultStyle
+})
 const cls = computed(() => {
-  const classes = [];
-  if (fixedHeader.value || layout.value === "mix")
-    classes.push("ant-pro-fixed-header");
+  const classes = []
+  if (fixedHeader.value || layout.value === 'mix')
+    classes.push('ant-pro-fixed-header')
 
-  if (layout.value) classes.push("ant-pro-fixed-header-action");
+  if (layout.value)
+    classes.push('ant-pro-fixed-header-action')
 
-  if (layout.value === "mix") classes.push("ant-pro-fixed-header-inverted");
+  if (layout.value === 'mix')
+    classes.push('ant-pro-fixed-header-inverted')
 
-  return classes;
-});
-const needFixed = computed(() => fixedHeader.value || layout.value === "mix");
+  return classes
+})
+const needFixed = computed(
+  () =>
+    fixedHeader.value || (layout.value === 'mix' && (splitMenus.value ? (selectedMenus.value ?? []).length > 0 : true)),
+)
 </script>
 
 <template>
@@ -73,5 +79,5 @@ const needFixed = computed(() => fixedHeader.value || layout.value === "mix");
 </template>
 
 <style lang="less">
-@import "./index.less";
+@import './index.less';
 </style>

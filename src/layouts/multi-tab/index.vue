@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { useAppStore, useMultiTab } from "@/stores";
 import { CloseOutlined, ReloadOutlined } from "@ant-design/icons-vue";
 import type { CSSProperties } from "vue";
 import Sortable, { SortableEvent } from "sortablejs";

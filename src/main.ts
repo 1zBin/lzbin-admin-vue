@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import App from "./App.vue";
+import { setupI18n } from "./locales";
 
 import router from "@/router";
 import "@/router/router-guard";
@@ -119,4 +120,5 @@ app.use(pinia);
 app.use(router);
 app.use(Antd);
 app.use(useTable);
+await setupI18n(app);
 app.mount("#app");

@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { useAppStore } from "@/stores";
-import zhCN from "ant-design-vue/es/locale/zh_CN";
 const appStore = useAppStore();
-
+const { antd } = useI18nLocale();
 const getPopupContainer = (trigger: any) => {
   if (trigger) {
     return trigger.parentNode;
@@ -16,7 +14,7 @@ const getPopupContainer = (trigger: any) => {
   <a-config-provider
     :theme="appStore.theme"
     :getPopupContainer="(getPopupContainer as any)"
-    :locale="zhCN"
+    :locale="antd"
   >
     <RouterView />
   </a-config-provider>

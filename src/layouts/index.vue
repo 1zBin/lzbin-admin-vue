@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useAppStore, useLayoutMenu, useUserStore } from "@/stores";
+import { useUserStore } from "@/stores";
 import { pick } from "@v-c/utils";
 import BasicLayout from "./basic-layout/index.vue";
 import SettingDrawer from "./components/setting-drawer/index.vue";
@@ -47,6 +47,7 @@ const layoutProps = computed(() =>
   >
     <template #headerActions>
       <UserAvatar />
+      <SelectLang />
     </template>
     <template #contentPrefix>
       <MultiTab v-if="layoutSetting.multiTab" />

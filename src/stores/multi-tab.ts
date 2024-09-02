@@ -90,6 +90,28 @@ export const useMultiTab = defineStore("multi-tab", () => {
     });
   };
 
+  const closeLeft = (key: string) => {
+    switchTab(key);
+
+    const index = list.value.findIndex((item) => item.fullPath === key);
+    const leftList = list.value.slice(0, index);
+    leftList.forEach((item) => {
+      if (item.affix) return;
+      close(item.fullPath);
+    });
+  };
+
+  const closeRight = (key: string) => {
+    switchTab(key);
+
+    const index = list.value.findIndex((item) => item.fullPath === key);
+    const rightList = list.value.slice(index + 1);
+    rightList.forEach((item) => {
+      if (item.affix) return;
+      close(item.fullPath);
+    });
+  };
+
   const clearAllTab = () => {
     list.value = [];
   };
@@ -111,5 +133,7 @@ export const useMultiTab = defineStore("multi-tab", () => {
     switchTab,
     closeOther,
     clearAllTab,
+    closeLeft,
+    closeRight,
   };
 });

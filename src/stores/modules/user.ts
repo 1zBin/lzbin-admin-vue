@@ -1,4 +1,4 @@
-import type { User } from "@/types";
+import type { UserInfo } from "@/types";
 import type { MenuData } from "~@/layouts/basic-layout/typing";
 import dynamicRoutes, { rootRoute } from "~@/router/dynamic-routes";
 import { genRoutes } from "~@/router/generate-route";
@@ -8,14 +8,16 @@ export const useUserStore = defineStore(
   () => {
     const routerData = shallowRef();
     const menuData = shallowRef<MenuData>([]);
-    const userInfo = shallowRef<User | undefined>({});
+    const userInfo = shallowRef<UserInfo>({});
 
     // 获取个人信息
     const getUserInfo = () => {
       return useGet("/user/info");
     };
 
-    const setUserInfo = (value: User | undefined) => {
+    const setUserInfo = (value: UserInfo) => {
+      console.log("setUserInfo", value);
+
       userInfo.value = value;
       console.log("userInfo", userInfo.value);
     };

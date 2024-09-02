@@ -52,4 +52,26 @@ export default [
       },
     ],
   },
+  {
+    path: "/account",
+    redirect: "/account/center",
+    name: "Account",
+    meta: {
+      title: "个人页",
+      icon: "UserOutlined",
+      locale: "menu.account",
+    },
+    component: basicRouteMap.RouteView,
+    children: [
+      {
+        path: "/account/settings",
+        name: "AccountSettings",
+        component: () => import("~/pages/account/settings.vue"),
+        meta: {
+          title: "个人设置",
+          locale: "menu.account.settings",
+        },
+      },
+    ],
+  },
 ] as RouteRecordRaw[];
