@@ -325,7 +325,7 @@ export default [
   {
     url: "/api/menu", // 请求地址
     method: "get",
-    response: (request: any) => {
+    response: () => {
       // 返回成功信息
       return { code: 200, data: createMenuList() };
     },
