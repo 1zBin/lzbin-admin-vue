@@ -1,24 +1,37 @@
+function createLoginList() {
+  return [
+    {
+      username: "admin", // 用户名
+      password: "admin", // 密码
+      type: "account", // 登录类型
+      token: "admin-token",
+    },
+    {
+      mobile: "12345678901",
+      code: "123456",
+      type: "mobile",
+      token: "admin-token",
+    },
+  ];
+}
+
 function createUserList() {
   return [
     {
-      userId: 1,
-      userName: "admin", // 用户名
-      password: "123456", // 用户密码
-      token: "Admin Token",
-      userInfo: {
-        avatar: "@/assets/images/errorUserAvatar.png", // 头像
-        nickName: "管理员", // 用户名
-      },
+      id: 1,
+      username: "Admin",
+      nickname: "管理员",
+      avatar: "@/assets/vue.svg",
+      roles: [],
+      token: "admin-token",
     },
     {
-      userId: 2,
-      userName: "test", // 用户名
-      password: "123456", // 用户密码
-      token: "Test Token",
-      userInfo: {
-        avatar: "@/assets/images/errorUserAvatar.png", // 头像
-        nickName: "测试用户", // 用户名
-      },
+      id: 2,
+      username: "Test",
+      nickname: "测试账号",
+      avatar: "@/assets/vue.svg",
+      roles: [],
+      token: "test-token",
     },
   ];
 }
@@ -26,25 +39,24 @@ function createUserList() {
 export default [
   // 用户登录假接口
   {
-    url: "/api/user/login", // 请求地址
+    url: "/api/login", // 请求地址
     method: "post",
     response: ({ body }: any) => {
       // 获取请求体鞋带过来的用户名与密码
-      const { userName, password } = body;
+      const { username, password } = body;
 
       // 调用获取用户信息的函数，用于判断是否有此用户
-      const userInfo = createUserList().find(
-        (item) => item.userName === userName && item.password === password
+      const loginData = createLoginList().find(
+        (item) => item.username === username && item.password === password
       );
 
       // 返回失败信息
-      if (!userInfo) {
+      if (!loginData) {
         return { code: 201, data: { message: " 账号或密码不正确 " } };
       }
 
       // 返回成功信息
-      const { token } = userInfo;
-      return { code: 200, data: { token } };
+      return { code: 200, data: loginData };
     },
   },
 
@@ -57,9 +69,7 @@ export default [
       const token = request.headers.token;
 
       // 查看用户信息是否包含有次token用户
-      const userInfo = createUserList().find(
-        (item) => item.token === token
-      )?.userInfo;
+      const userInfo = createUserList().find((item) => item.token === token);
 
       // 返回失败信息
       if (!userInfo) {

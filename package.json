@@ -28,6 +28,7 @@
     "lodash-es": "^4.17.21",
     "mitt": "^3.0.1",
     "pinia": "^2.2.2",
+    "pinia-plugin-persist": "^1.0.0",
     "vite-plugin-mock": "^2.9.6",
     "vue": "^3.4.38",
     "vue-i18n": "^9.14.0",

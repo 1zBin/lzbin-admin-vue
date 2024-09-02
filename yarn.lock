@@ -7606,7 +7606,14 @@ pify@^4.0.1:
   resolved "https://registry.npmmirror.com/pify/-/pify-4.0.1.tgz"
   integrity sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==
 
-pinia@^2.2.2:
+pinia-plugin-persist@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/pinia-plugin-persist/-/pinia-plugin-persist-1.0.0.tgz"
+  integrity sha512-M4hBBd8fz/GgNmUPaaUsC29y1M09lqbXrMAHcusVoU8xlQi1TqgkWnnhvMikZwr7Le/hVyMx8KUcumGGrR6GVw==
+  dependencies:
+    vue-demi "^0.12.1"
+
+pinia@^2.0.0, pinia@^2.2.2:
   version "2.2.2"
   resolved "https://registry.npmjs.org/pinia/-/pinia-2.2.2.tgz"
   integrity sha512-ja2XqFWZC36mupU4z1ZzxeTApV7DOw44cV4dhQ9sGwun+N89v/XP7+j7q6TanS1u1tdbK4r+1BUx7heMaIdagA==
@@ -9760,6 +9767,11 @@ vue-component-type-helpers@^2.0.0:
   resolved "https://registry.npmjs.org/vue-component-type-helpers/-/vue-component-type-helpers-2.1.4.tgz"
   integrity sha512-aVqB3KxwpM76cYRkpnezl1J62E/1omzHQfx1yuz7zcbxmzmP/PeSgI20NEmkdeGnjZPVzm0V9fB4ZyRu5BBj4A==
 
+vue-demi@^0.12.1:
+  version "0.12.5"
+  resolved "https://registry.npmjs.org/vue-demi/-/vue-demi-0.12.5.tgz"
+  integrity sha512-BREuTgTYlUr0zw0EZn3hnhC3I6gPWv+Kwh4MCih6QcAeaTlaIX0DwOVN0wHej7hSvDPecz4jygy/idsgKfW58Q==
+
 vue-demi@^0.14.10:
   version "0.14.10"
   resolved "https://registry.npmjs.org/vue-demi/-/vue-demi-0.14.10.tgz"
@@ -9815,7 +9827,7 @@ vue-types@^3.0.0:
   dependencies:
     is-plain-object "3.0.1"
 
-"vue@^2.6.14 || ^3.3.0", vue@^3.0, vue@^3.0.0, "vue@^3.0.0-0 || ^2.6.0", vue@^3.2.0, vue@^3.2.25, vue@^3.4.38, vue@>=3.0.3, vue@>=3.2.0, "vue@2 || 3", vue@3.4.38:
+"vue@^2.0.0 || >=3.0.0", "vue@^2.6.14 || ^3.3.0", vue@^3.0, vue@^3.0.0, "vue@^3.0.0-0 || ^2.6.0", vue@^3.2.0, vue@^3.2.25, vue@^3.4.38, vue@>=3.0.3, vue@>=3.2.0, "vue@2 || 3", vue@3.4.38:
   version "3.4.38"
   resolved "https://registry.npmjs.org/vue/-/vue-3.4.38.tgz"
   integrity sha512-f0ZgN+mZ5KFgVv9wz0f4OgVKukoXtS3nwET4c2vLBGQR50aI8G0cqbFtLlX9Yiyg3LFGBitruPHt2PxwTduJEw==
