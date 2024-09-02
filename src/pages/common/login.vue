@@ -89,7 +89,6 @@ async function submit() {
     });
     // 获取当前是否存在重定向的链接，如果存在就走重定向的地址
     const redirect = getQueryParam("redirect", "/");
-    console.log(87, redirect);
 
     router.push({
       path: redirect,

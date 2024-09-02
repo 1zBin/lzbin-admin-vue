@@ -24,8 +24,6 @@ export const useUserStore = defineStore("user", () => {
 
   const getMenuRoutes = async () => {
     const { data } = await getRouteMenusApi();
-    console.log("getMenuRoutes", data);
-
     return generateTreeRoutes(data ?? []);
   };
 
@@ -37,7 +35,6 @@ export const useUserStore = defineStore("user", () => {
     const { menuData: treeMenuData, routeData } = await dynamicLoadWay();
 
     menuData.value = treeMenuData;
-    console.log("menu", menuData.value);
 
     routerData.value = {
       ...rootRoute,

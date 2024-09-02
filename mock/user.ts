@@ -65,8 +65,10 @@ export default [
     url: "/api/user/info", // 请求地址
     method: "get",
     response: (request: any) => {
+      console.log("request", request);
+
       // 获取请求头携带的 token
-      const token = request.headers.token;
+      const token = request.headers.Authorization;
 
       // 查看用户信息是否包含有次token用户
       const userInfo = createUserList().find((item) => item.token === token);
