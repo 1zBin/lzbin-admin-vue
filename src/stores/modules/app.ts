@@ -6,7 +6,6 @@ import type {
   ThemeType,
 } from "~@/layouts/basic-layout/typing";
 import defaultSetting from "~@/config/default-setting";
-import { modifyUserInfoSelf } from "@/api/system/user";
 
 export interface LayoutSetting {
   title?: string;
@@ -101,10 +100,8 @@ export const useAppStore = defineStore("app", () => {
   const changeSettingLayout = async (key: keyof LayoutSetting, value: any) => {
     if (key === "theme") {
       toggleTheme(value as ThemeType);
-      await modifyUserInfoSelf({ sideMode: value });
     } else if (key === "colorPrimary") {
       toggleColorPrimary(value);
-      await modifyUserInfoSelf({ activeColor: value });
     } else if (key === "layout") toggleLayout(value as LayoutType);
     else if (key in layoutSetting) (layoutSetting as any)[key] = value;
   };

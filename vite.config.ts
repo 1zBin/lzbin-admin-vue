@@ -10,13 +10,12 @@ import {
   createStyleImportPlugin,
   VxeTableResolve,
 } from "vite-plugin-style-import";
+import { viteMockServe } from "vite-plugin-mock"; // 引入 mock 插件提供的方法
 
 const baseSrc = fileURLToPath(new URL("./src", import.meta.url));
 
-export default ({ mode }: { mode: string }) => {
-  // 引入环境变量
-  const env = loadEnv(mode, process.cwd());
-  return defineConfig({
+export default defineConfig(({ command }) => {
+  return {
     plugins: [
       vue(), // Vue 插件
       vueJsx(),
@@ -35,6 +34,11 @@ export default ({ mode }: { mode: string }) => {
       Unocss(), // Unocss 样式框架插件
       createStyleImportPlugin({
         resolves: [VxeTableResolve()],
+      }),
+      // mock 配置项
+      viteMockServe({
+        mockPath: "mock",
+        localEnabled: command === "serve",
       }),
     ],
     resolve: {
@@ -90,15 +94,15 @@ export default ({ mode }: { mode: string }) => {
     server: {
       strictPort: true, // 设置为 true 表示启用严格的端口检查
       host: "0.0.0.0",
-      port: 91, // 本地端口号
+      port: 9527, // 本地端口号
       open: false, // 默认浏览器自动打开
-      proxy: {
-        "/api": {
-          target: env.VITE_PROXY_API_TARGET,
-          changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, ""),
-        },
-      },
+      // proxy: {
+      //   "/api": {
+      //     target: env.VITE_PROXY_API_TARGET,
+      //     changeOrigin: true,
+      //     rewrite: (path) => path.replace(/^\/api/, ""),
+      //   },
+      // },
     },
-  });
-};
+  };
+});

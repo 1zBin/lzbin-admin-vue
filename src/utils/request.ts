@@ -38,7 +38,7 @@ instance.interceptors.request.use(
         requestTime = Date.now();
       }
       // 请求头设置token
-      config.headers["x-token"] = token;
+      config.headers["token"] = token;
       // console.log("网络层面成功", config);
     }
     return config;
@@ -55,34 +55,6 @@ instance.interceptors.response.use(
   (response: any) => {
     // 如果请求成功成功 2xx 就直接返回 data 中的数据
     // console.log("数据层面成功", response);
-    const { updateToken, removeToken } = useToken();
-    if (response.headers["new-token"]) {
-      updateToken(response.headers["new-token"]);
-    }
-
-    if (
-      response.data.code === 2000 &&
-      !response.config.url.includes("get") &&
-      !response.config.url.includes("/login/signIn") &&
-      !response.config.url.includes("/login/captcha")
-    ) {
-      message.success(response.data.msg);
-    } else if (response.data.code === 1000) {
-      // 登录进去后切换角色，该角色没有菜单权限的情况，就要跳回登录页
-      if (
-        response.data.msg === "权限不足" &&
-        response.config.url === "/menu/getMenuSelf"
-      ) {
-        message.error("获取菜单权限不足，请联系管理员，2秒后跳回登录页面");
-        setTimeout(() => {
-          removeToken();
-          router.push("/Login");
-        }, 2000);
-      } else {
-        // 通用错误，通用提示
-        message.error(response.data.msg);
-      }
-    }
     return response;
   },
   (error) => {

@@ -1,11 +1,6 @@
 import router from "@/router";
-import { useToken, useUserStore, useAppStore } from "@/stores";
-import type {
-  CaptchaResult,
-  EmailParams,
-  LoginParams,
-  LoginResult,
-} from "@/types";
+import { useToken, useUserStore } from "@/stores";
+import type { EmailParams, LoginParams, LoginResult } from "@/types";
 import { defineStore } from "pinia";
 
 export const useLogin = defineStore("login", () => {
@@ -17,15 +12,18 @@ export const useLogin = defineStore("login", () => {
   const loginFn = async (params: LoginParams, type: string) => {
     let res;
     if (type === "account") {
-      res = await usePost<LoginResult, LoginParams>("/login/signIn", params);
+      res = await usePost<LoginResult, LoginParams>("/user/login", params);
     } else if (type === "mobile") {
-      res = await usePost<LoginResult, LoginParams>(
-        "/login/signInBySms",
-        params
-      );
+      // res = await usePost<LoginResult, LoginParams>(
+      //   "/login/signInBySms",
+      //   params
+      // );
     }
 
-    if (res?.data.code === 2000) {
+    // 登录成功后
+    console.log("登录成功", res);
+
+    if (res?.data.code === 200) {
       const { updateToken } = useToken();
       const { setUserInfo, getUserInfo } = useUserStore();
       // 保存登录的时间戳
@@ -33,18 +31,10 @@ export const useLogin = defineStore("login", () => {
       updateToken(res.data.data.token);
       const result = await getUserInfo();
       setUserInfo(result.data.data.userInfo);
-      // 获取用户的layout属性并赋值
-      const { toggleTheme, toggleColorPrimary } = useAppStore();
-      toggleTheme(result.data.data.userInfo.sideMode);
-      toggleColorPrimary(result.data.data.userInfo.activeColor);
       // 跳转到首页
       router.push("/");
     }
     return res;
-  };
-  // 获取图片验证码
-  const createCaptcha = () => {
-    return usePost<CaptchaResult>("/login/captcha");
   };
 
   // 获取短信验证码
@@ -54,7 +44,6 @@ export const useLogin = defineStore("login", () => {
   return {
     loginFn,
     registerFn,
-    createCaptcha,
     sendSms,
   };
 });

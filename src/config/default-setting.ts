@@ -1,13 +1,13 @@
 import type { LayoutSetting } from "@/stores";
 
 export default {
-  title: "SDWan管理系统",
+  title: "Antdv System",
   theme: "light", // 主题风格
   logo: "https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg",
   collapsed: false, // 菜单栏是否折叠
   drawerVisible: false, // 右侧工具栏是否隐藏
   colorPrimary: "#1677FF", // 主题色
-  layout: "top", // 导航模式
+  layout: "side", // 导航模式
   contentWidth: "Fluid", // 内容区域宽度
   fixedHeader: false, // 固定Header
   fixedSider: true, // 固定侧边菜单

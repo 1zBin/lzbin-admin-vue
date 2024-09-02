@@ -9,12 +9,10 @@ import _ from "lodash";
 const bubbleCanvas = ref<HTMLCanvasElement>();
 const appStore = useAppStore();
 const { layoutSetting } = storeToRefs(appStore);
-const { loginFn, createCaptcha, registerFn, sendSms } = useLogin();
+const { loginFn, registerFn } = useLogin();
 const loginModel: LoginParams = reactive({
   userName: undefined,
   password: undefined,
-  captcha: undefined,
-  captchaId: undefined,
   phone: undefined,
   email: undefined,
   verifyCode: undefined,
@@ -25,11 +23,8 @@ const codeLoading = shallowRef(false);
 const resetCounter = 60;
 const submitLoading = shallowRef(false);
 const registerLoading = shallowRef(false);
-// 图片url地址
-const imgSrc = ref<string | undefined>("");
-const picTimeOut = 60000;
 
-const { counter, pause, reset, resume, isActive } = useInterval(1000, {
+const { counter, pause, isActive } = useInterval(1000, {
   controls: true,
   immediate: false,
   callback(count) {
@@ -39,30 +34,19 @@ const { counter, pause, reset, resume, isActive } = useInterval(1000, {
   },
 });
 
-// 获取登录验证图片
-const getPicPath = async () => {
-  const { data } = await createCaptcha();
-  if (data.code === 2000) {
-    imgSrc.value = data.data.picPath;
-    loginModel.captchaId = data.data.captchaId;
-    // 保存第一次获取验证码的时间戳
-    localStorage.setItem("getPicTime", Date.now().toString());
-  }
-};
-
 // 获取验证码
 const getCode = async () => {
   codeLoading.value = true;
   try {
     await formRef.value.validate(["phone"]);
-    const res = await sendSms({ phone: loginModel.phone });
-    if (res.data.code === 2000) {
-      setTimeout(() => {
-        reset();
-        resume();
-        codeLoading.value = false;
-      }, 1000);
-    }
+    // const res = await sendSms({ phone: loginModel.phone });
+    // if (res.data.code === 2000) {
+    //   setTimeout(() => {
+    //     reset();
+    //     resume();
+    //     codeLoading.value = false;
+    //   }, 1000);
+    // }
     codeLoading.value = false;
   } catch (error) {
     codeLoading.value = false;
@@ -86,16 +70,6 @@ const submit = async () => {
       delete submitData.phone;
       delete submitData.verifyCode;
 
-      const picTime = Number(localStorage.getItem("getPicTime"));
-      const curTime = Date.now();
-      const dir = curTime - picTime;
-      if (dir > picTimeOut) {
-        message.warning("验证码已失效，请重新获取！");
-        getPicPath();
-        submitLoading.value = false;
-        return;
-      }
-
       // 账号登录
       delete submitData.type;
       const res = await loginFn(submitData, "account");
@@ -104,7 +78,6 @@ const submit = async () => {
         formRef.value?.resetFields();
         submitLoading.value = false;
         if (res.data.code === 1000) {
-          getPicPath();
         }
       }, 1000);
     }
@@ -113,8 +86,6 @@ const submit = async () => {
       delete submitData.email;
       delete submitData.userName;
       delete submitData.password;
-      delete submitData.captcha;
-      delete submitData.captchaId;
       delete submitData.type;
       await loginFn(submitData, "mobile");
       setTimeout(() => {
@@ -149,7 +120,6 @@ const forgetFn = _.throttle(() => {
 }, 3200);
 
 onMounted(async () => {
-  getPicPath();
   await delayTimer(300);
   pageBubble.init(unref(bubbleCanvas)!);
 });
@@ -172,9 +142,9 @@ onBeforeUnmount(() => {
             <span class="ant-pro-form-login-logo">
               <!-- <img w-full h-full object-cover src="/logo.svg" /> -->
             </span>
-            <span class="ant-pro-form-login-title"> SDWan管理系统 </span>
+            <span class="ant-pro-form-login-title"> Antdv System </span>
             <span class="ant-pro-form-login-desc">
-              {{ "舜航SDWan管理系统" }}
+              {{ "Antdv System" }}
             </span>
           </div>
           <div class="login-lang flex-center relative z-11">
@@ -215,7 +185,7 @@ onBeforeUnmount(() => {
           />
           <!-- 登录框右侧 -->
           <div
-            class="ant-pro-form-login-main-right px-5 w-[335px] flex-center flex-col relative z-11"
+            class="ant-pro-form-login-main-right px-5 py-10 w-[335px] flex-center flex-col relative z-11"
           >
             <div class="text-center py-6 text-2xl">
               {{ "欢迎使用本系统" }}
@@ -262,30 +232,6 @@ onBeforeUnmount(() => {
                       <LockOutlined />
                     </template>
                   </a-input-password>
-                </a-form-item>
-                <a-form-item
-                  name="captcha"
-                  :rules="[{ required: true, message: '验证码不能为空' }]"
-                >
-                  <div flex items-center justify-between w-full>
-                    <a-input
-                      style="width: 50%; margin-right: 5px"
-                      v-model:value.trim="loginModel.captcha"
-                      placeholder="验证码"
-                      size="large"
-                      @pressEnter="submit"
-                    >
-                    </a-input>
-                    <img
-                      :src="imgSrc"
-                      alt=""
-                      @click="getPicPath()"
-                      w-40
-                      h-40px
-                      rounded-lg
-                      style="border: 1px solid #d9d9d9"
-                    />
-                  </div>
                 </a-form-item>
               </template>
 

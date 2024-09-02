@@ -1,4 +1,3 @@
-import { useMenuStore } from "@/stores";
 import type { User } from "@/types";
 import type { MenuData } from "~@/layouts/basic-layout/typing";
 import dynamicRoutes, { rootRoute } from "~@/router/dynamic-routes";
@@ -13,7 +12,7 @@ export const useUserStore = defineStore(
 
     // 获取个人信息
     const getUserInfo = () => {
-      return usePost("/user/getUserInfoSelf");
+      return useGet("/user/info");
     };
 
     const setUserInfo = (value: User | undefined) => {
@@ -23,14 +22,12 @@ export const useUserStore = defineStore(
     const removeUserInfo = () => (userInfo.value = {});
 
     const generateRoutes = async () => {
-      const { getMenus } = useMenuStore();
-      const menus = await getMenus();
-
-      menuData.value = genRoutes(menus);
+      // const menus = await getMenus(); // 获取真实菜单数据
+      menuData.value = genRoutes(dynamicRoutes);
 
       const currentRoute = {
         ...rootRoute,
-        children: [...dynamicRoutes, ...menus],
+        children: [...dynamicRoutes],
       };
 
       return currentRoute;
