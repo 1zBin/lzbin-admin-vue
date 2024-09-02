@@ -39,8 +39,6 @@ export default defineConfig(({ command }) => {
       // mock 配置项
       viteMockServe({
         mockPath: "mock",
-        // 根据项目配置。可以配置在.env文件
-        enable: true,
         localEnabled: command === "serve",
       }),
     ],
