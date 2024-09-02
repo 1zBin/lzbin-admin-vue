@@ -28,7 +28,7 @@ export default [
   {
     url: "/api/user/login", // 请求地址
     method: "post",
-    response: ({ body }) => {
+    response: ({ body }: any) => {
       // 获取请求体鞋带过来的用户名与密码
       const { userName, password } = body;
 
@@ -52,7 +52,7 @@ export default [
   {
     url: "/api/user/info", // 请求地址
     method: "get",
-    response: (request) => {
+    response: (request: any) => {
       // 获取请求头携带的 token
       const token = request.headers.token;
 
