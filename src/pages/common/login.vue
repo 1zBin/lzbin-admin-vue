@@ -75,7 +75,7 @@ async function submit() {
         type: "mobile",
       } as unknown as LoginMobileParams;
     }
-    const data = await loginApi(params);
+    const data = (await loginApi(params)) as any;
     if (data.code === 201) {
       message.error(data.data?.message);
       submitLoading.value = false;
