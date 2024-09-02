@@ -14,6 +14,9 @@ import Antd from "ant-design-vue";
 import "ant-design-vue/dist/reset.css";
 import * as antIcons from "@ant-design/icons-vue";
 
+import { setupProdMockServer } from "../mock/_createProductionServer";
+setupProdMockServer();
+
 import {
   // https://vxetable.cn/#/table/start/use
   // 全局对象

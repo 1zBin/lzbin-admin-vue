@@ -11,6 +11,7 @@ import {
   VxeTableResolve,
 } from "vite-plugin-style-import";
 import { viteMockServe } from "vite-plugin-mock"; // 引入 mock 插件提供的方法
+import { resolve } from "path";
 
 const baseSrc = fileURLToPath(new URL("./src", import.meta.url));
 
@@ -38,6 +39,8 @@ export default defineConfig(({ command }) => {
       // mock 配置项
       viteMockServe({
         mockPath: "mock",
+        // 根据项目配置。可以配置在.env文件
+        enable: true,
         localEnabled: command === "serve",
       }),
     ],
