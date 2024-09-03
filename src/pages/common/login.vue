@@ -118,7 +118,7 @@ onBeforeUnmount(() => {
       <div class="ant-pro-form-login-main rounded">
         <!-- 登录头部 -->
         <div class="flex-between h-15 px-4 mb-[2px]">
-          <div class="flex-end">
+          <div class="ant-pro-form-login-box flex-end">
             <span class="ant-pro-form-login-logo">
               <img class="w-[40px] h-[40px] object-cover" src="/logo.svg" />
             </span>
@@ -468,6 +468,14 @@ onBeforeUnmount(() => {
 }
 @media screen and (max-width: 767px) {
   .login-media(350px);
+
+  .ant-pro-form-login-box {
+    align-items: center;
+  }
+
+  .ant-pro-form-login-title {
+    font-size: 26px;
+  }
 
   .ant-pro-login-divider {
     display: none;
