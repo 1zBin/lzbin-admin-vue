@@ -308,6 +308,26 @@ function createMenuList() {
       keepAlive: true,
       locale: "menu.menu4.menu2",
     },
+    {
+      id: 48,
+      parentId: null,
+      title: "其他组件",
+      icon: "TableOutlined",
+      component: "RouteView",
+      redirect: "/list/orther/drag",
+      path: "/orther",
+      name: "Orther",
+      locale: "menu.orther",
+    },
+    {
+      id: 49,
+      parentId: 48,
+      path: "/orther/drag",
+      component: "/orther/drag",
+      title: "拖拽",
+      keepAlive: true,
+      locale: "menu.orther.drag",
+    },
   ];
 }
 

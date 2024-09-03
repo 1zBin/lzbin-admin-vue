@@ -132,7 +132,6 @@ async function init() {
       current: pagination.current,
       pageSize: pagination.pageSize,
     });
-    console.log(124, data);
 
     dataSource.value = data ?? [];
   } catch (e) {

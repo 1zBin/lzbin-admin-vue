@@ -281,4 +281,26 @@ export default [
       },
     ],
   },
+  {
+    path: "/orther",
+    redirect: "/orther/drag",
+    name: "Orther",
+    meta: {
+      title: "其他组件",
+      icon: "UserOutlined",
+      locale: "menu.orther",
+    },
+    component: basicRouteMap.RouteView,
+    children: [
+      {
+        path: "/orther/drag",
+        name: "OrtherDrag",
+        component: () => import("~/pages/orther/drag/index.vue"),
+        meta: {
+          title: "拖拽",
+          locale: "menu.orther.drag",
+        },
+      },
+    ],
+  },
 ] as RouteRecordRaw[];
