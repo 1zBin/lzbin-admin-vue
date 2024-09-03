@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { LogoutOutlined, ProfileOutlined } from "@ant-design/icons-vue";
 
+const { t } = useI18nLocale();
 const message = useMessage();
 const userStore = useUserStore();
 const multiTabStore = useMultiTab();
@@ -48,14 +49,16 @@ async function handleClick({ key }: any) {
           <template #icon>
             <ProfileOutlined />
           </template>
-          <RouterLink to="/account/settings"> 个人设置 </RouterLink>
+          <RouterLink to="/account/settings">
+            {{ t("menu.account.settings") }}
+          </RouterLink>
         </a-menu-item>
         <a-menu-divider />
         <a-menu-item key="logout">
           <template #icon>
             <LogoutOutlined />
           </template>
-          退出登录
+          {{ t("menu.account.logout") }}
         </a-menu-item>
       </a-menu>
     </template>

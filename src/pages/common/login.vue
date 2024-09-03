@@ -120,7 +120,7 @@ onBeforeUnmount(() => {
         <div class="flex-between h-15 px-4 mb-[2px]">
           <div class="flex-end">
             <span class="ant-pro-form-login-logo">
-              <img w-full h-full object-cover src="/logo.svg" />
+              <img class="w-[40px] h-[40px] object-cover" src="/logo.svg" />
             </span>
             <span class="ant-pro-form-login-title"> Antdv System </span>
             <span class="ant-pro-form-login-desc">
@@ -449,6 +449,13 @@ onBeforeUnmount(() => {
   }
 }
 @media (min-width: 992px) {
+  .login-container {
+    background-image: url(https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg);
+    background-repeat: no-repeat;
+    background-position: center 110px;
+    background-size: 100%;
+  }
+
   .ant-pro-form-login-main-left {
     width: 700px;
   }
