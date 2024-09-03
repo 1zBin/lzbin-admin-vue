@@ -19,18 +19,20 @@ function createUserList() {
   return [
     {
       id: 1,
-      username: "Admin",
-      nickname: "管理员",
-      avatar: "@/assets/vue.svg",
-      roles: [],
+      username: "admin",
+      nickname: "超级管理员",
+      avatar:
+        "https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png",
+      roles: ["ADMIN"],
       token: "admin-token",
     },
     {
       id: 2,
-      username: "Test",
+      username: "test",
       nickname: "测试账号",
-      avatar: "@/assets/vue.svg",
-      roles: [],
+      avatar:
+        "https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png",
+      roles: ["USER"],
       token: "test-token",
     },
   ];
@@ -64,22 +66,27 @@ export default [
   {
     url: "/api/user/info", // 请求地址
     method: "get",
-    response: (_request: any) => {
+    response: (request: any) => {
       // 获取请求头携带的 token
-      // const token = request.headers.Authorization;
+      const token = request.headers.authorization;
 
       // 查看用户信息是否包含有次token用户
-      const userInfo = createUserList().find(
-        (item) => item.token === "admin-token"
-      );
+      const userInfo = createUserList().find((item) => item.token == token);
 
       // 返回失败信息
       if (!userInfo) {
-        return { code: 201, data: { message: " 获取用户信息失败 " } };
+        return {
+          code: 201,
+          data: { message: " 获取用户信息失败 ", data: userInfo },
+        };
       }
 
       // 返回成功信息
-      return { code: 200, data: { userInfo } };
+      return {
+        code: 200,
+        msg: "获取成功",
+        data: userInfo,
+      };
     },
   },
 ];

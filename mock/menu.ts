@@ -207,15 +207,6 @@ function createMenuList() {
     {
       id: 37,
       parentId: 36,
-      path: "/account/center",
-      title: "个人中心",
-      name: "AccountCenter",
-      component: "/account/center",
-      locale: "menu.account.center",
-    },
-    {
-      id: 38,
-      parentId: 36,
       path: "/account/settings",
       title: "个人设置",
       name: "AccountSettings",
@@ -223,7 +214,7 @@ function createMenuList() {
       locale: "menu.account.settings",
     },
     {
-      id: 39,
+      id: 38,
       parentId: 3,
       title: "分步表单",
       component: "/form/step-form/index",
@@ -233,7 +224,7 @@ function createMenuList() {
       locale: "menu.form.step-form",
     },
     {
-      id: 40,
+      id: 39,
       parentId: 3,
       title: "高级表单",
       component: "/form/advanced-form/index",
@@ -243,7 +234,7 @@ function createMenuList() {
       locale: "menu.form.advanced-form",
     },
     {
-      id: 41,
+      id: 40,
       parentId: 26,
       path: "/list/table-list",
       title: "查询表格",
@@ -252,7 +243,7 @@ function createMenuList() {
       locale: "menu.list.consult-table",
     },
     {
-      id: 42,
+      id: 41,
       parentId: 1,
       title: "分析页",
       component: "/dashboard/analysis",
@@ -262,7 +253,7 @@ function createMenuList() {
       locale: "menu.dashboard.analysis",
     },
     {
-      id: 43,
+      id: 42,
       parentId: 1,
       title: "监控页",
       component: "/dashboard/monitor",
@@ -272,7 +263,7 @@ function createMenuList() {
       locale: "menu.dashboard.monitor",
     },
     {
-      id: 44,
+      id: 43,
       parentId: 1,
       title: "工作台",
       component: "/dashboard/workplace",
@@ -282,7 +273,7 @@ function createMenuList() {
       locale: "menu.dashboard.workplace",
     },
     {
-      id: 45,
+      id: 44,
       parentId: 26,
       path: "/list/crud-table",
       title: "增删改查表格",
@@ -291,7 +282,7 @@ function createMenuList() {
       locale: "menu.list.crud-table",
     },
     {
-      id: 46,
+      id: 45,
       parentId: 9,
       path: "/menu/menu4",
       redirect: "/menu/menu4/menu1",
@@ -300,7 +291,7 @@ function createMenuList() {
       locale: "menu.menu.menu4",
     },
     {
-      id: 47,
+      id: 46,
       parentId: 45,
       path: "/menu/menu4/menu1",
       component: "/menu/menu-2-1/menu1",
@@ -309,7 +300,7 @@ function createMenuList() {
       locale: "menu.menu4.menu1",
     },
     {
-      id: 48,
+      id: 47,
       parentId: 45,
       path: "/menu/menu4/menu2",
       component: "/menu/menu-2-1/menu2",

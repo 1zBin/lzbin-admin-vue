@@ -11,6 +11,7 @@ import {
   removeRouteListener,
 } from "~@/utils/route-listener";
 import { useLayoutState } from "~/layouts/basic-layout/context";
+import Sortable, { SortableEvent } from "sortablejs";
 
 const multiTabStore = useMultiTab();
 const { list, activeKey } = storeToRefs(multiTabStore);
@@ -86,6 +87,7 @@ const otherDisabled = computed(() => {
     list.value.filter((v: any) => !v.affix).length <= 1
   );
 });
+
 listenerRouteChange((route: RouteLocationNormalized) => {
   if (route.fullPath.startsWith("/redirect")) return;
   const item = list.value.find((item: any) => item.fullPath === route.fullPath);
@@ -94,7 +96,64 @@ listenerRouteChange((route: RouteLocationNormalized) => {
   activeKey.value = route.fullPath;
   multiTabStore.addItem(route);
 }, true);
+
+onMounted(() => {
+  nextTick(() => {
+    createSort();
+  });
+});
+
+let timer: any;
+const createSort = () => {
+  timer = setTimeout(() => {
+    rowDrop();
+  }, 500);
+};
+let sortable: any;
+const rowDrop = () => {
+  const navList = document.getElementsByClassName(
+    "ant-tabs-nav-list"
+  )[0] as HTMLElement; // 将返回的 Element 类型转换为 HTMLElement 类型
+  if (navList) {
+    sortable = Sortable.create(navList, {
+      animation: 150,
+      onEnd: (event: SortableEvent) => {
+        const newIndex = event.newIndex as number;
+        const oldIndex = event.oldIndex as number;
+        const movedData = arraymove(
+          JSON.parse(JSON.stringify(list.value)),
+          oldIndex,
+          newIndex
+        );
+        console.log(movedData);
+      },
+    });
+  }
+};
+
+const arraymove = (arr: any[], fromIndex: number, toIndex: number) => {
+  var element = arr[fromIndex];
+  arr.splice(fromIndex, 1);
+  arr.splice(toIndex, 0, element);
+  let tmp: any = [];
+  arr.forEach((s) => {
+    if (s) {
+      tmp.push(s);
+    }
+  });
+  return tmp;
+};
+
+const destorySort = () => {
+  clearTimeout(timer);
+  if (sortable) {
+    sortable.destroy();
+    sortable = null;
+  }
+};
+
 onUnmounted(() => {
+  destorySort();
   removeRouteListener();
 });
 </script>

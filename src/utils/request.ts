@@ -34,8 +34,6 @@ const axiosLoading = new AxiosLoading();
 async function requestHandler(
   config: InternalAxiosRequestConfig & RequestConfigExtra
 ): Promise<InternalAxiosRequestConfig> {
-  console.log(3737, config);
-
   // 处理请求前的url
   if (
     import.meta.env.DEV &&
