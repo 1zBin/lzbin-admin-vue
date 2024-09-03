@@ -121,6 +121,7 @@ export default {
 
       // 检查是否在目标区域内
       if (isInsideDropZone(event.clientX, event.clientY)) {
+        alert("拖拽成功！");
         console.log("拖拽成功！");
       }
 

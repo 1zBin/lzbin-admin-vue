@@ -115,6 +115,7 @@ export default {
   "menu.list.basic-list": "标准列表",
   "menu.list.consult-table": "查询表格",
   "menu.list.crud-table": "增删改查表格",
+  "menu.list.advanced-table": "高级表格",
   "menu.list.card-list": "卡片列表",
   "menu.list.search-list": "搜索列表",
   "menu.list.search-list.articles": "搜索列表（文章）",

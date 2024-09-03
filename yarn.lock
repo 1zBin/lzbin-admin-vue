@@ -2520,6 +2520,14 @@
   dependencies:
     vue-demi ">=0.14.8"
 
+"@vxe-ui/core@^4.0.4":
+  version "4.0.5"
+  resolved "https://registry.npmjs.org/@vxe-ui/core/-/core-4.0.5.tgz"
+  integrity sha512-hiu157nv+9gACZGnjlAKGlxKZyMPY/GpDDft5Tpwwe7GPYDJ8xPU2F9xQyRdevJ2zEZCs6xhGovIxO9lPL2KSg==
+  dependencies:
+    dom-zindex "^1.0.5"
+    xe-utils "^3.5.30"
+
 "@webgpu/types@^0.1.34":
   version "0.1.44"
   resolved "https://mirrors.cloud.tencent.com/npm/@webgpu/types/-/types-0.1.44.tgz"
@@ -4062,6 +4070,11 @@ dom-scroll-into-view@^2.0.0:
   version "2.0.1"
   resolved "https://registry.npmjs.org/dom-scroll-into-view/-/dom-scroll-into-view-2.0.1.tgz"
   integrity sha512-bvVTQe1lfaUr1oFzZX80ce9KLDlZ3iU+XGNE/bz9HnGdklTieqsbmsLHe+rT2XWqopvL0PckkYqN7ksmm5pe3w==
+
+dom-zindex@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.npmjs.org/dom-zindex/-/dom-zindex-1.0.5.tgz"
+  integrity sha512-fvtsFOawZEkt6/SE67eu5IY+Iid8bHAHoYMnRzk4y3ZycAtZJvx7JqE0c0T5GXfxSXw0XKyYDI9K5VkDpovc6A==
 
 domexception@^4.0.0:
   version "4.0.0"
@@ -9848,6 +9861,27 @@ vue-types@^3.0.0:
     "@vue/server-renderer" "3.4.38"
     "@vue/shared" "3.4.38"
 
+vue3-slide-verify@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.npmjs.org/vue3-slide-verify/-/vue3-slide-verify-1.1.5.tgz"
+  integrity sha512-CP6OH0+NRt94+cvprdDSG5a3/D0KgOWGUJu1hUmNw02SC7SLYUcjotUt6dlfhrcsoibu0wr5lx0MOsCfXSnwDw==
+  dependencies:
+    vue "^3.2.25"
+
+vxe-pc-ui@^4.1.17:
+  version "4.1.17"
+  resolved "https://registry.npmjs.org/vxe-pc-ui/-/vxe-pc-ui-4.1.17.tgz"
+  integrity sha512-eqh6LTAzMM3Yl+lhMZx5PO1Bd/w/J4XKWkBu/hxOvjRYW+mtmdAHaNOuthxdDbLUDjJhIJFSK/WZ7bqYvWeryA==
+  dependencies:
+    "@vxe-ui/core" "^4.0.4"
+
+vxe-table@^4.7.76:
+  version "4.7.76"
+  resolved "https://registry.npmjs.org/vxe-table/-/vxe-table-4.7.76.tgz"
+  integrity sha512-NoD/3yparGnbXMfCmWTXaWa8FR6o9oYldnzOpweUlJSoyQbdVTAwJ38zykzufs05/tsi0q0QJae18u+si/LQdA==
+  dependencies:
+    vxe-pc-ui "^4.1.17"
+
 w3c-xmlserializer@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmjs.org/w3c-xmlserializer/-/w3c-xmlserializer-4.0.0.tgz"
@@ -10054,6 +10088,11 @@ ws@^8.13.0, ws@^8.18.0:
   version "8.18.0"
   resolved "https://registry.npmjs.org/ws/-/ws-8.18.0.tgz"
   integrity sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw==
+
+xe-utils@^3.5.30:
+  version "3.5.30"
+  resolved "https://registry.npmjs.org/xe-utils/-/xe-utils-3.5.30.tgz"
+  integrity sha512-5Ez6JUANpMakduiTLxrNObzqMebnM4697KvHW5okedkUjXvYgGvkbg0tABTkvwDW/Pb09v7vT68dzBOeAuOu0g==
 
 xml-name-validator@^4.0.0:
   version "4.0.0"

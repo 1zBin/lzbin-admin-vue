@@ -312,7 +312,7 @@ function createMenuList() {
       id: 48,
       parentId: null,
       title: "其他组件",
-      icon: "TableOutlined",
+      icon: "AppstoreAddOutlined",
       component: "RouteView",
       redirect: "/list/orther/drag",
       path: "/orther",
@@ -327,6 +327,15 @@ function createMenuList() {
       title: "拖拽",
       keepAlive: true,
       locale: "menu.orther.drag",
+    },
+    {
+      id: 50,
+      parentId: 26,
+      path: "/list/advanced-table",
+      title: "高级表格",
+      name: "AdvancedCard",
+      component: "/list/advanced-table",
+      locale: "menu.list.advanced-table",
     },
   ];
 }

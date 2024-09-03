@@ -116,6 +116,7 @@ export default {
   "menu.list.basic-list": "Basic List",
   "menu.list.consult-table": "Consult Table",
   "menu.list.crud-table": "CRUD Table",
+  "menu.list.advanced-table": "Advanced Table",
   "menu.list.card-list": "Card List",
   "menu.list.search-list": "Search List",
   "menu.list.search-list.articles": "Search List(articles)",

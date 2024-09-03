@@ -170,6 +170,7 @@ const stopDrag = (event: MouseEvent) => {
   // 检查是否在目标区域内
   for (let i = 0; i < dropZones.value.length; i++) {
     if (isInsideDropZone(event.clientX, event.clientY, i)) {
+      alert(`拖拽到第 ${i} 个 dropZone`);
       console.log(`拖拽到第 ${i} 个 dropZone`);
       break; // 如果已经在某个 dropZone 内，则跳出循环
     }

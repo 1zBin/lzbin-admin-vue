@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import Single from "./components/single.vue";
 import Multiple from "./components/multiple.vue";
+import SlideVerify from "./components/slide-verify.vue";
 const activeKey = ref("1");
 </script>
 
@@ -12,6 +13,9 @@ const activeKey = ref("1");
       </a-tab-pane>
       <a-tab-pane key="2" tab="多个元素拖拽到多个区域" force-render>
         <Multiple />
+      </a-tab-pane>
+      <a-tab-pane key="3" tab="滑块验证登录" force-render>
+        <SlideVerify />
       </a-tab-pane>
     </a-tabs>
   </a-card>

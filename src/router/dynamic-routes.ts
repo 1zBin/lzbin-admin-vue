@@ -257,6 +257,15 @@ export default [
           },
         ],
       },
+      {
+        path: "/list/advanced-table",
+        name: "AdvancedTable",
+        component: () => import("~/pages/list/advanced-table/index.vue"),
+        meta: {
+          title: "高级表格",
+          locale: "menu.list.advanced-table",
+        },
+      },
     ],
   },
   {
