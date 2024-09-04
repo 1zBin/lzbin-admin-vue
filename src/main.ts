@@ -6,7 +6,9 @@ import { setupI18n } from "./locales";
 import { setupAccessDirective, setupLoadingDirective } from "./directive";
 import router from "~/router";
 import "~/router/router-guard";
+import Antd from "ant-design-vue";
 import "ant-design-vue/dist/reset.css";
+import * as antIcons from "@ant-design/icons-vue";
 import "~/assets/styles/reset.css";
 import "uno.css";
 // 完整导入 UI 组件库
@@ -22,6 +24,15 @@ setupProdMockServer();
 const pinia = createPinia();
 async function start() {
   const app: App = createApp(Root);
+
+  Object.keys(antIcons).forEach((key) => {
+    // @ts-ignore
+    app.component(key, antIcons[key]);
+  });
+  // 添加到全局
+  app.config.globalProperties.$antIcons = antIcons;
+
+  app.use(Antd);
   app.use(VxeUI);
   app.use(VxeUITable);
   app.use(pinia);
@@ -30,6 +41,12 @@ async function start() {
   app.use(router);
   app.mount("#app");
   app.config.performance = true;
+}
+
+declare module "vue" {
+  export interface ComponentCustomProperties {
+    $antIcons: any;
+  }
 }
 
 function setupDirective(app: App) {

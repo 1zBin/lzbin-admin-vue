@@ -89,14 +89,13 @@ export const tableOption = {
     {
       field: "remark",
       title: "描述",
-      minWidth: 200,
+      width: "auto",
     },
     {
       field: "action",
       title: "操作",
       slots: { default: "name" },
       fixed: "right", // 固定列在右侧
-      width: 150,
     },
   ],
 };

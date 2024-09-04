@@ -54,21 +54,7 @@ const emits = defineEmits([
   "handleEdit",
   "handleReset",
   "handleDetails",
-  "handleAddson",
-  "handleCopy",
-  "handlePermission",
-  "handleManage",
-  "handleReplace",
-  "setPermission",
-  "changeContent",
-  "handleMonitoring",
-  "handleSettings",
-  "handleDwonloadCrt",
   "handleBackup",
-  "handleReboot",
-  "handleReset",
-  "handleShutdown",
-  "handlePortList",
 ]);
 
 const tableData = computed({
@@ -208,70 +194,16 @@ const gridEvents: VxeGridListeners<Record<string, object>> = {
 const handleActionBtn = (record: Record<string, object>, key: string) => {
   if (key === "del") {
     modalFunction(modalArg.delete.title, "handleDelete", record);
-  } else if (
-    key === "reset" &&
-    props.tableConfig.name !== "cpe-dev" &&
-    props.tableConfig.name !== "pop-dev"
-  ) {
+  } else if (key === "reset") {
     modalFunction(modalArg.reset.title, "handleReset", record);
-  } else if (key === "restore") {
-    modalFunction(modalArg.restore.title, "handleRestore", record);
   }
 
-  const keys = [
-    "edit",
-    "addson",
-    "permission",
-    "copy",
-    "manage",
-    "replace",
-    "details",
-    "addCpe",
-    "settings",
-    "reboot",
-    "reset",
-    "shutdown",
-    "portList",
-  ];
+  const keys = ["edit", "addson", "details"];
   if (keys.includes(key)) {
     const emitsKey = `handle${capitalizeFirstLetter(key)}` as any;
     emits(emitsKey, record);
   }
 };
-
-// -------------下拉菜单-------------
-
-// interface ItemVO {
-//   label: string;
-//   value: string;
-// }
-// const pulldownRef = ref<VxePulldownInstance>();
-
-//点击展开
-// const pulldownToggle = (index: number) => {
-//   nextTick(() => {
-//     const $pulldown: any = pulldownRef.value;
-//     if ($pulldown) {
-//       console.log("pulldownToggle", index, $pulldown[index]);
-
-//       $pulldown[index].togglePanel();
-//     }
-//   });
-// };
-
-//点击选项
-// const selectItem = (
-//   record: Record<string, object>,
-//   item: ItemVO,
-//   index: number
-// ) => {
-//   const $pulldown: any = pulldownRef.value;
-//   if ($pulldown) {
-//     console.log("selectItem", item, $pulldown);
-//     handleActionBtn(record, item.value);
-//     $pulldown[index].togglePanel();
-//   }
-// };
 
 // 单选
 const radioChangeEvent: VxeTableEvents.RadioChange<Record<string, object>> = ({
@@ -450,69 +382,9 @@ onUnmounted(() => {
       @page-change="handlePageChange"
     >
       <template #name="{ row, column }">
-        <!-- --------菜单-------- -->
-        <template v-if="column.field === 'type'">
-          <a-tag color="success">菜单</a-tag>
-          <template v-if="row.menuBtn.length">
-            <a-tag color="pink">按钮</a-tag>
-          </template>
-        </template>
-        <template v-else-if="column.field === 'hidden'">
+        <template v-if="column.field === 'hidden'">
           <a-tag v-if="!row.hidden" color="success">显示</a-tag>
           <a-tag v-else color="default">隐藏</a-tag>
-        </template>
-        <!-- -----历史操作详情----- -->
-        <template v-if="column.field === 'reqBody'">
-          <a-popover placement="bottomRight" v-if="row.reqBody">
-            <template #content>
-              <a-card>
-                <div v-html="row.reqBody"></div>
-              </a-card>
-            </template>
-            <InfoCircleOutlined />
-          </a-popover>
-          <span v-else>无</span>
-        </template>
-        <template v-else-if="column.field === 'respBody'">
-          <a-popover placement="bottomRight" v-if="row.respBody">
-            <template #content>
-              <a-card>
-                <div v-html="row.respBody"></div>
-              </a-card>
-            </template>
-            <InfoCircleOutlined />
-          </a-popover>
-          <span v-else>无</span>
-        </template>
-        <!-- ------登录日志------ -->
-        <template v-else-if="column.field === 'msg'">
-          <a-popover placement="topLeft" v-if="row.msg && row.msg.length > 20">
-            <template #content>
-              <div style="max-width: 300px !important">
-                {{ row.msg }}
-              </div>
-            </template>
-            <div
-              style="
-                max-width: 200px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-              "
-            >
-              {{ row.msg }}
-            </div>
-          </a-popover>
-          <span v-else-if="row.msg && row.msg.length <= 20">{{ row.msg }}</span>
-        </template>
-        <!-- --------是否启用TLS-------- -->
-        <template v-else-if="column.field === 'useTls'">
-          <a-tag v-if="row.useTls === '1'" color="blue">启用</a-tag>
-          <a-tag v-else color="default">不启用</a-tag>
-        </template>
-        <!-- --------是否启用TLS-------- -->
-        <template v-else-if="column.field === 'disabled'">
-          <span>{{ row.disabled === "yes" ? "是" : "否" }}</span>
         </template>
         <!-- --------操作-------- -->
         <!-- --------时间-------- -->
@@ -520,14 +392,6 @@ onUnmounted(() => {
           <span>
             {{ formatDate(row[column.field]) }}
           </span>
-        </template>
-        <!-- --------备份-------- -->
-        <template v-else-if="column.field === 'backupType'">
-          <span v-if="row.backupType === '1'">自动备份</span>
-          <span v-else-if="row.backupType === '2'">手动备份</span>
-          <span v-else-if="row.backupType === '3'">配置变更备份</span>
-          <span v-else-if="row.backupType === '4'">进行恢复时备份</span>
-          <span v-else>--</span>
         </template>
         <!-- --------操作-------- -->
         <template v-else-if="column.field === 'action'">
@@ -550,19 +414,4 @@ onUnmounted(() => {
   </a-card>
 </template>
 
-<style lang="less" scoped>
-.dropdown-list {
-  width: auto;
-  box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  border: 1px solid #dcdfe6;
-}
-.list-item {
-  padding: 10px 10px 10px 10px;
-}
-.list-item:hover {
-  cursor: pointer;
-  border-radius: 5px;
-  background-color: #f5f7fa;
-}
-</style>
+<style lang="less" scoped></style>
